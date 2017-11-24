@@ -8,13 +8,10 @@
       "module": "commonjs",
       "moduleResolution": "node",
       "declaration": true,
-      "declarationDir": "./types",
+      "declarationDir": "../types",
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true
-   },
-   "exclude": [
-     "node_modules"
-   ]
+   }
 }
