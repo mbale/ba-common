@@ -1,0 +1,18 @@
+{
+   "compilerOptions": {
+      "lib": [
+         "es5",
+         "es6"
+      ],
+      "target": "es2017",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "declaration": true,
+      "declarationDir": "./types",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true
+   },
+   "paths":[]
+}

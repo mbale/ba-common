@@ -1,0 +1,29 @@
+{
+   "name": "ba-common",
+   "version": "1.0.0",
+   "main": "build/main.js",
+   "author": "Balazs Mocsai <me@bael.me>",
+   "license": "MIT",
+   "scripts": {
+      "dev": "backpack dev",
+      "build": "backpack build"
+   },
+   "types": "./types/index.d.ts",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "@types/reflect-metadata": "^0.0.5",
+      "awesome-typescript-loader": "^3.2.3",
+      "backpack-core": "^0.4.3",
+      "reflect-metadata": "^0.1.10",
+      "tslint-config-airbnb": "^5.3.0",
+      "typescript": "2.5.2"
+   },
+   "dependencies": {
+      "axios": "^0.17.1",
+      "immutable": "^3.8.2",
+      "qs": "^6.5.1",
+      "talisman": "^0.20.0",
+      "typedi": "^0.5.2",
+      "typeorm": "0.1.1"
+   }
+}
