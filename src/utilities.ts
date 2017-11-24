@@ -28,6 +28,9 @@ export class AppError extends Error {
  * @returns 
  */
 export function DIConnection(mongodbURL : string, entities : Function[]) {
+  if (!mongodbURL) {
+    throw new Error('Missing mongodb URL');
+  }
   return function (object : object, propertyName : string, index? : number) {
     const dbOptions : ConnectionOptions = {
       entities,
@@ -39,3 +42,12 @@ export function DIConnection(mongodbURL : string, entities : Function[]) {
     Container.registerHandler({ object, propertyName, index, value: () => connection });
   };
 }
+
+export interface QueueDefinition {
+
+}
+
+export async function DIRedisQueues(REDIS_URL : string, queues : QueueDefinition) {
+
+}
+
