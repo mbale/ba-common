@@ -1,7 +1,4 @@
-# Awesome Project Build with TypeORM
+# ba-common
         
-Steps to run this project:
-
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+This package contains the common modules for backend and microservices.
+More info in documentation.

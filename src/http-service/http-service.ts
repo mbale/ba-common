@@ -5,14 +5,14 @@ import qs from 'qs';
  * Default base class for each service communicator
  * 
  * @abstract
- * @class BaseService
+ * @class HTTPService
  */
-export abstract class BaseService {
+abstract class HTTPService {
   /**
    * Contains root URL of service
    * 
    * @static
-   * @memberof BaseService
+   * @memberof HTTPService
    */
   public static serviceBaseURL : string = '';
   public static axiosInstance : AxiosInstance = null;
@@ -24,7 +24,7 @@ export abstract class BaseService {
    * @static
    * @param {string} serviceBaseURL 
    * @returns 
-   * @memberof BaseService
+   * @memberof HTTPService
    */
   public static initialize(serviceBaseURL : string) {
     this.serviceBaseURL = serviceBaseURL;
@@ -42,7 +42,7 @@ export abstract class BaseService {
    * 
    * @static
    * @returns {Promise<boolean>} 
-   * @memberof BaseService
+   * @memberof HTTPService
    */
   public static async ping() : Promise<boolean> {
     try {
@@ -53,3 +53,5 @@ export abstract class BaseService {
     return true;
   }
 }
+
+export default HTTPService;

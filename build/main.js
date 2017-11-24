@@ -85,14 +85,16 @@ module.exports = __webpack_require__(2);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const compare = __webpack_require__(3);
-exports.compare = compare;
-const entity = __webpack_require__(6);
-exports.entity = entity;
-const utility = __webpack_require__(7);
-exports.utility = utility;
-const task = __webpack_require__(9);
-exports.task = task;
+const compare_1 = __webpack_require__(3);
+exports.Compare = compare_1.default;
+const entity_1 = __webpack_require__(7);
+exports.Entity = entity_1.default;
+const http_service_1 = __webpack_require__(8);
+exports.HTTPService = http_service_1.default;
+const Utility = __webpack_require__(11);
+exports.Utility = Utility;
+const Task = __webpack_require__(13);
+exports.Task = Task;
 
 
 /***/ }),
@@ -102,48 +104,16 @@ exports.task = task;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const immutable_1 = __webpack_require__(4);
-const dice_1 = __webpack_require__(5);
-/**
- * Compare type
- *
- * @enum {number}
- */
-var CompareModes;
-(function (CompareModes) {
-    CompareModes[CompareModes["Strict"] = 0] = "Strict";
-    CompareModes[CompareModes["Similar"] = 1] = "Similar";
-})(CompareModes = exports.CompareModes || (exports.CompareModes = {}));
-/**
- * Type of mode result
- *
- * @enum {number}
- */
-var MatchType;
-(function (MatchType) {
-    MatchType[MatchType["MainIdentifier"] = 0] = "MainIdentifier";
-    MatchType[MatchType["KeywordIdentifier"] = 1] = "KeywordIdentifier";
-    MatchType[MatchType["NotFound"] = 2] = "NotFound";
-})(MatchType = exports.MatchType || (exports.MatchType = {}));
-/**
- * Settings for comparing mode
- *
- * @export
- * @enum {number}
- */
-var CompareMode;
-(function (CompareMode) {
-    CompareMode[CompareMode["StrictOnly"] = 0] = "StrictOnly";
-    CompareMode[CompareMode["SimilarOnly"] = 1] = "SimilarOnly";
-    CompareMode[CompareMode["StrictAndSimilar"] = 2] = "StrictAndSimilar";
-})(CompareMode = exports.CompareMode || (exports.CompareMode = {}));
+const types_1 = __webpack_require__(4);
+const immutable_1 = __webpack_require__(5);
+const dice_1 = __webpack_require__(6);
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *
  * @abstract
- * @class BaseCompare
+ * @class Compare
  */
-class BaseCompare {
+class Compare {
     /**
      * Creates an instance of BaseCompare.
      *
@@ -180,23 +150,23 @@ class BaseCompare {
         }
         this.unit = unit.toLowerCase();
         const { mode, thresholds, } = this.compareSettings;
-        const { StrictOnly, SimilarOnly, StrictAndSimilar, } = CompareMode;
+        const { StrictOnly, SimilarOnly, StrictAndSimilar, } = types_1.CompareMode;
         const modelCountBefore = this.relatedEntities.count();
         if (mode === StrictOnly || mode === StrictAndSimilar) {
             const result = this.strictCompare(entity);
             switch (result) {
-                case MatchType.MainIdentifier:
+                case types_1.MatchType.MainIdentifier:
                     this.relatedEntities = this.relatedEntities.push({
                         entityId: entity._id,
-                        relationType: CompareModes.Strict,
-                        keyType: MatchType.MainIdentifier,
+                        relationType: types_1.CompareModes.Strict,
+                        keyType: types_1.MatchType.MainIdentifier,
                     });
                     break;
-                case MatchType.KeywordIdentifier:
+                case types_1.MatchType.KeywordIdentifier:
                     this.relatedEntities = this.relatedEntities.push({
                         entityId: entity._id,
-                        relationType: CompareModes.Strict,
-                        keyType: MatchType.KeywordIdentifier,
+                        relationType: types_1.CompareModes.Strict,
+                        keyType: types_1.MatchType.KeywordIdentifier,
                     });
                 default:
                     break;
@@ -207,7 +177,7 @@ class BaseCompare {
             if (result >= thresholds.dice) {
                 this.relatedEntities = this.relatedEntities.push({
                     entityId: entity._id,
-                    relationType: CompareModes.Similar,
+                    relationType: types_1.CompareModes.Similar,
                     summedIndex: result,
                 });
             }
@@ -246,12 +216,12 @@ class BaseCompare {
             .map(k => k.toLowerCase())
             .contains(unit);
         if (MainIdentifierMatch) {
-            return MatchType.MainIdentifier;
+            return types_1.MatchType.MainIdentifier;
         }
         if (keywordIdentifierMatch) {
-            return MatchType.KeywordIdentifier;
+            return types_1.MatchType.KeywordIdentifier;
         }
-        return MatchType.NotFound;
+        return types_1.MatchType.NotFound;
     }
     /**
      * Compare unit with entity in similar indexed way
@@ -297,23 +267,65 @@ class BaseCompare {
             .toArray();
     }
 }
-exports.BaseCompare = BaseCompare;
+exports.default = Compare;
 
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("immutable");
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Compare type
+ *
+ * @enum {number}
+ */
+var CompareModes;
+(function (CompareModes) {
+    CompareModes[CompareModes["Strict"] = 0] = "Strict";
+    CompareModes[CompareModes["Similar"] = 1] = "Similar";
+})(CompareModes = exports.CompareModes || (exports.CompareModes = {}));
+/**
+ * Type of mode result
+ *
+ * @enum {number}
+ */
+var MatchType;
+(function (MatchType) {
+    MatchType[MatchType["MainIdentifier"] = 0] = "MainIdentifier";
+    MatchType[MatchType["KeywordIdentifier"] = 1] = "KeywordIdentifier";
+    MatchType[MatchType["NotFound"] = 2] = "NotFound";
+})(MatchType = exports.MatchType || (exports.MatchType = {}));
+/**
+ * Settings for comparing mode
+ *
+ * @export
+ * @enum {number}
+ */
+var CompareMode;
+(function (CompareMode) {
+    CompareMode[CompareMode["StrictOnly"] = 0] = "StrictOnly";
+    CompareMode[CompareMode["SimilarOnly"] = 1] = "SimilarOnly";
+    CompareMode[CompareMode["StrictAndSimilar"] = 2] = "StrictAndSimilar";
+})(CompareMode = exports.CompareMode || (exports.CompareMode = {}));
+
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("talisman/metrics/distance/dice");
+module.exports = require("immutable");
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("talisman/metrics/distance/dice");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -329,11 +341,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = __webpack_require__(0);
-var SourceType;
-(function (SourceType) {
-    SourceType["Pinnacle"] = "pinnacle";
-    SourceType["OddsGG"] = "oddsgg";
-})(SourceType = exports.SourceType || (exports.SourceType = {}));
 class ServiceEntity {
     constructor() {
         this._keywords = [];
@@ -355,10 +362,6 @@ __decorate([
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", Array)
-], ServiceEntity.prototype, "_sources", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Array)
 ], ServiceEntity.prototype, "_keywords", void 0);
 __decorate([
     typeorm_1.Column(),
@@ -374,18 +377,93 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ServiceEntity.prototype, "updateModificationDate", null);
-exports.ServiceEntity = ServiceEntity;
+exports.default = ServiceEntity;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __webpack_require__(9);
+const qs_1 = __webpack_require__(10);
+/**
+ * Default base class for each service communicator
+ *
+ * @abstract
+ * @class HTTPService
+ */
+class HTTPService {
+    /**
+     * Initialize the core service with bootstrapped values
+     * Needs to be called
+     *
+     * @static
+     * @param {string} serviceBaseURL
+     * @returns
+     * @memberof HTTPService
+     */
+    static initialize(serviceBaseURL) {
+        this.serviceBaseURL = serviceBaseURL;
+        this.axiosInstance = axios_1.default.create({
+            paramsSerializer(param) {
+                // by default axios convert same query params into array in URL e.g. ids=[] 
+                return qs_1.default.stringify(param, { indices: false });
+            },
+            baseURL: `${serviceBaseURL}`,
+        });
+    }
+    /**
+     * Checks if service's healthy
+     *
+     * @static
+     * @returns {Promise<boolean>}
+     * @memberof HTTPService
+     */
+    static async ping() {
+        try {
+            const request = await this.axiosInstance.get(`${this.serviceBaseURL}/ping`);
+        }
+        catch (e) {
+            return false;
+        }
+        return true;
+    }
+}
+/**
+ * Contains root URL of service
+ *
+ * @static
+ * @memberof HTTPService
+ */
+HTTPService.serviceBaseURL = '';
+HTTPService.axiosInstance = null;
+exports.default = HTTPService;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("qs");
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = __webpack_require__(0);
-const typedi_1 = __webpack_require__(8);
+const typedi_1 = __webpack_require__(12);
 /**
  * BaseError
  *
@@ -426,13 +504,13 @@ exports.connection = connection;
 
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("typedi");
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

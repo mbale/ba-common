@@ -1,12 +1,15 @@
-import * as compare from './compare';
-import * as entity from './entity';
-import * as utility from './utilities';
-import * as task from './task';
+import Compare from './compare/compare';
+import Entity from './entity/entity';
+import HTTPService from './http-service/http-service';
+import * as CompareTypes from './compare/types';
+import * as Utility from './utilities';
+import * as Task from './task';
 
 export {
-  compare,
-  entity,
-  utility,
-  task,
+  Compare,
+  Entity,
+  Utility,
+  Task,
+  HTTPService,
 };
 

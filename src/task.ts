@@ -1,4 +1,4 @@
-import { ServiceEntity } from './entity';
+import ServiceEntity from './entity/entity';
 import { MongoRepository } from 'typeorm'; 
 import { Container } from 'typedi';
 
