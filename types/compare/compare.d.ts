@@ -1,6 +1,6 @@
 import { MatchType, Relation, CompareSettings } from './types';
 import { List } from 'immutable';
-import { IServiceEntity } from '../entity/entity';
+import { IServiceEntity } from '../entity/types';
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *

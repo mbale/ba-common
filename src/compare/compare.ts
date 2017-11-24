@@ -5,7 +5,7 @@ import {
   similarity,
 } from 'talisman/metrics/distance/dice';
 import levenshtein from 'talisman/metrics/distance/levenshtein';
-import { IServiceEntity } from '../entity/entity';
+import { IServiceEntity } from '../entity/types';
 
 /**
  * Base abstract class that contains all core functionality for extending further compare services

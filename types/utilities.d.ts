@@ -16,4 +16,4 @@ export declare class AppError extends Error {
  * @param {Function[]} entities
  * @returns
  */
-export declare function connection(mongodbURL: string, entities: Function[]): (object: object, propertyName: string, index?: number) => void;
+export declare function DIConnection(mongodbURL: string, entities: Function[]): (object: object, propertyName: string, index?: number) => void;
