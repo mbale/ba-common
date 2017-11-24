@@ -6,7 +6,15 @@ import {
   BeforeInsert,
 } from 'typeorm';
 
-abstract class ServiceEntity {
+export interface IServiceEntity {
+  _id : ObjectID;
+  name : string;
+  _keywords : string[];
+  _createdAt : Date;
+  _updatedAt : Date;
+}
+
+abstract class ServiceEntity implements IServiceEntity {
   @ObjectIdColumn()
   _id : ObjectID;
 
