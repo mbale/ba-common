@@ -5,7 +5,7 @@ import {
   similarity,
 } from 'talisman/metrics/distance/dice';
 import levenshtein from 'talisman/metrics/distance/levenshtein';
-import ServiceEntity from '../entity/entity';
+import { IServiceEntity } from '../entity/entity';
 
 /**
  * Base abstract class that contains all core functionality for extending further compare services
@@ -54,7 +54,7 @@ abstract class Compare {
    * @param {ServiceEntity} entity  
    * @memberof BaseCompare
    */
-  public runInSequence(unit : string, entity : ServiceEntity) : boolean {
+  public runInSequence(unit : string, entity : IServiceEntity) : boolean {
     if (!unit) {
       throw new Error('Missing unit to test');
     }
@@ -133,11 +133,11 @@ abstract class Compare {
    * Compare unit with entity in strict way
    * 
    * @protected
-   * @param {ServiceEntity} entity 
+   * @param {IServiceEntity} entity 
    * @returns {MatchType} 
    * @memberof BaseCompare
    */
-  protected strictCompare(entity : ServiceEntity) : MatchType {
+  protected strictCompare(entity : IServiceEntity) : MatchType {
     const unit = this.unit;
     const entityName = entity.name.toLowerCase();
     const keywords = List(entity._keywords);
@@ -165,11 +165,11 @@ abstract class Compare {
    * Compare unit with entity in similar indexed way
    * 
    * @protected
-   * @param {ServiceEntity} entity 
+   * @param {IServiceEntity} entity 
    * @returns {number} 
    * @memberof BaseCompare
    */
-  protected similarCompare(entity : ServiceEntity) : number {
+  protected similarCompare(entity : IServiceEntity) : number {
     const unit = this.unit;
     const entityName = entity.name.toLowerCase();
     const diceThreshold = this.compareSettings.thresholds.dice;

@@ -1,6 +1,6 @@
 import { MatchType, Relation, CompareSettings } from './types';
 import { List } from 'immutable';
-import ServiceEntity from '../entity/entity';
+import { IServiceEntity } from '../entity/entity';
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *
@@ -40,7 +40,7 @@ declare abstract class Compare {
      * @param {ServiceEntity} entity
      * @memberof BaseCompare
      */
-    runInSequence(unit: string, entity: ServiceEntity): boolean;
+    runInSequence(unit: string, entity: IServiceEntity): boolean;
     /**
      * Get similarity index between two unit
      *
@@ -55,20 +55,20 @@ declare abstract class Compare {
      * Compare unit with entity in strict way
      *
      * @protected
-     * @param {ServiceEntity} entity
+     * @param {IServiceEntity} entity
      * @returns {MatchType}
      * @memberof BaseCompare
      */
-    protected strictCompare(entity: ServiceEntity): MatchType;
+    protected strictCompare(entity: IServiceEntity): MatchType;
     /**
      * Compare unit with entity in similar indexed way
      *
      * @protected
-     * @param {ServiceEntity} entity
+     * @param {IServiceEntity} entity
      * @returns {number}
      * @memberof BaseCompare
      */
-    protected similarCompare(entity: ServiceEntity): number;
+    protected similarCompare(entity: IServiceEntity): number;
     /**
      * Returns the related objects
      *

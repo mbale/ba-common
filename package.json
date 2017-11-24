@@ -11,7 +11,8 @@
    },
    "types": "./types/index.d.ts",
    "devDependencies": {
-      "@types/node": "^8.0.29",
+      "@types/node": "^8.0.53",
+      "@types/qs": "^6.5.1",
       "@types/reflect-metadata": "^0.0.5",
       "awesome-typescript-loader": "^3.2.3",
       "backpack-core": "^0.4.3",

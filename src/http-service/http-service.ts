@@ -1,5 +1,5 @@
 import axios, { AxiosInstance} from 'axios';
-import qs from 'qs';
+import * as qs from 'qs';
 
 /**
  * Default base class for each service communicator
