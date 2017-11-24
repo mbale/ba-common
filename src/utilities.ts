@@ -25,21 +25,27 @@ export class AppError extends Error {
  * @export
  * @param {string} mongodbURL 
  * @param {Function[]} entities 
+ * @param {typeof Container} container 
  * @returns 
  */
-export function DIConnection(mongodbURL : string, entities : Function[]) {
+export function DIConnection(mongodbURL : string, entities : Function[], container : typeof Container) {
   if (!mongodbURL) {
     throw new Error('Missing mongodb URL');
   }
   return function (object : object, propertyName : string, index? : number) {
-    const dbOptions : ConnectionOptions = {
-      entities,
-      type: 'mongodb',
-      url: mongodbURL,
-      logging: ['query', 'error'],
-    };
-    const connection = createConnection(dbOptions);
-    Container.registerHandler({ object, propertyName, index, value: () => connection });
+    try {
+      const dbOptions : ConnectionOptions = {
+        entities,
+        type: 'mongodb',
+        url: mongodbURL,
+        logging: ['query', 'error'],
+      };
+
+      const connection = createConnection(dbOptions);
+      container.registerHandler({ object, propertyName, index, value: () => connection }); 
+    } catch (error) {
+      console.log(error)
+    }
   };
 }
 

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import Compare from './compare/compare';
 import ServiceEntity from './entity/entity';
 import HTTPService from './http-service/http-service';
