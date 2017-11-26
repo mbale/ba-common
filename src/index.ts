@@ -4,6 +4,7 @@ import ServiceEntity from './entity/entity';
 import HTTPService from './http-service/http-service';
 import { Service, MatchMapType, Match, MatchSource,
    MatchSourceType, MatchOdds, MatchOddsType, MatchStatusType, MatchUpdate,
+   Team, TeamMember, TeamSocialSite, TeamSocialSiteType,
 } from './entity/types';
 import { CompareModes, CompareMode, CompareSettings,
    CompareMatchType, CompareRelation, CompareThresholds,
@@ -28,6 +29,10 @@ export {
   MatchOddsType,
   MatchStatusType,
   MatchUpdate,
+  Team, 
+  TeamMember, 
+  TeamSocialSite, 
+  TeamSocialSiteType,
   AppError,
   dIConnection,
   HTTPService,

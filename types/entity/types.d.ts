@@ -13,7 +13,7 @@ export interface Service {
     _createdAt: Date;
     _updatedAt: Date;
 }
-export interface Match extends Service {
+export interface Match {
     _id: ObjectID;
     gameId: ObjectID;
     leagueId: ObjectID;
@@ -70,4 +70,28 @@ export interface MatchUpdate {
     homeTeamScore: number;
     awayTeamScore: number;
     addedAt: Date;
+}
+export interface TeamMember {
+    name: string;
+    info?: string;
+    joinedIn?: Date;
+    countryCode?: string;
+    sites?: string[];
+    role?: string;
+}
+export declare enum TeamSocialSiteType {
+    Facebook = 0,
+    Twitter = 1,
+}
+export interface TeamSocialSite {
+    type: TeamSocialSiteType;
+    name: string;
+}
+export interface Team {
+    info?: string;
+    members?: TeamMember[];
+    countryCode?: string;
+    site: string;
+    socialSites: TeamSocialSite[];
+    logo?: string;
 }

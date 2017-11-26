@@ -88,3 +88,30 @@ export interface MatchUpdate {
   Team
 */
 
+export interface TeamMember {
+  name: string;
+  info?: string;
+  joinedIn?: Date;
+  countryCode?: string;
+  sites?: string[];
+  role?: string;
+}
+
+export enum TeamSocialSiteType {
+  Facebook, Twitter,
+}
+
+export interface TeamSocialSite {
+  type : TeamSocialSiteType;
+  name : string;
+}
+
+export interface Team {
+  info? : string;
+  members? : TeamMember[];
+  countryCode? : string;
+  site : string;
+  socialSites : TeamSocialSite[];
+  logo? : string;
+}
+
