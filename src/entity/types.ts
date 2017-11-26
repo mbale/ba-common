@@ -116,3 +116,19 @@ export interface Team {
   logo? : string;
 }
 
+/*
+  League
+*/
+
+export interface League {
+  name : string;
+}
+
+
+/*
+  Game
+*/
+
+export interface Game {
+  name : string;
+}

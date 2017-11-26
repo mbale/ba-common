@@ -96,3 +96,9 @@ export interface Team {
     socialSites: TeamSocialSite[];
     logo?: string;
 }
+export interface League {
+    name: string;
+}
+export interface Game {
+    name: string;
+}
