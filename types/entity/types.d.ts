@@ -89,6 +89,7 @@ export interface TeamSocialSite {
 }
 export interface Team {
     info?: string;
+    name: string;
     members?: TeamMember[];
     countryCode?: string;
     site: string;
