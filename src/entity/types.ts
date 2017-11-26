@@ -18,7 +18,7 @@ export interface Service {
   Match
 */
 
-export interface Match extends Service {
+export interface Match {
   _id : ObjectID;
   gameId: ObjectID;
   leagueId: ObjectID;
@@ -83,4 +83,8 @@ export interface MatchUpdate {
   awayTeamScore: number;
   addedAt: Date;
 }
+
+/*
+  Team
+*/
 
