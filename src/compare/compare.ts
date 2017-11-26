@@ -1,11 +1,12 @@
-import { MatchType, Relation, CompareSettings, CompareMode, CompareModes } from './types';
+import { CompareMatchType, CompareRelation, CompareSettings,
+  CompareMode, CompareModes } from './types';
 import { EntitySchema, ObjectID } from 'typeorm';
 import { List, Map, Collection } from 'immutable';
 import {
   similarity,
 } from 'talisman/metrics/distance/dice';
 import levenshtein from 'talisman/metrics/distance/levenshtein';
-import { IServiceEntity } from '../entity/types';
+import { Service } from '../entity/types';
 
 /**
  * Base abstract class that contains all core functionality for extending further compare services
@@ -14,7 +15,7 @@ import { IServiceEntity } from '../entity/types';
  * @class Compare
  */
 abstract class Compare {
-  protected relatedEntities: List<Relation> = List();
+  protected relatedEntities: List<CompareRelation> = List();
 
   /**
    * The string which we compare
@@ -54,7 +55,7 @@ abstract class Compare {
    * @param {ServiceEntity} entity  
    * @memberof BaseCompare
    */
-  public runInSequence(unit : string, entity : IServiceEntity) : boolean {
+  public runInSequence(unit : string, entity : Service) : boolean {
     if (!unit) {
       throw new Error('Missing unit to test');
     }
@@ -82,18 +83,18 @@ abstract class Compare {
       const result = this.strictCompare(entity);
 
       switch (result) {
-        case MatchType.MainIdentifier:
+        case CompareMatchType.MainIdentifier:
           this.relatedEntities = this.relatedEntities.push({
             entityId: entity._id,
             relationType: CompareModes.Strict,
-            keyType: MatchType.MainIdentifier,
+            keyType: CompareMatchType.MainIdentifier,
           });
           break;
-        case MatchType.KeywordIdentifier:
+        case CompareMatchType.KeywordIdentifier:
           this.relatedEntities = this.relatedEntities.push({
             entityId: entity._id,
             relationType: CompareModes.Strict,
-            keyType: MatchType.KeywordIdentifier,
+            keyType: CompareMatchType.KeywordIdentifier,
           });
         default:
           break;
@@ -133,11 +134,11 @@ abstract class Compare {
    * Compare unit with entity in strict way
    * 
    * @protected
-   * @param {IServiceEntity} entity 
-   * @returns {MatchType} 
+   * @param {Service} entity 
+   * @returns {CompareMatchType} 
    * @memberof BaseCompare
    */
-  protected strictCompare(entity : IServiceEntity) : MatchType {
+  protected strictCompare(entity : Service) : CompareMatchType {
     const unit = this.unit;
     const entityName = entity.name.toLowerCase();
     const keywords = List(entity._keywords);
@@ -151,25 +152,25 @@ abstract class Compare {
       .contains(unit);
 
     if (MainIdentifierMatch) {
-      return MatchType.MainIdentifier;
+      return CompareMatchType.MainIdentifier;
     }
 
     if (keywordIdentifierMatch) {
-      return MatchType.KeywordIdentifier;
+      return CompareMatchType.KeywordIdentifier;
     }
 
-    return MatchType.NotFound;
+    return CompareMatchType.NotFound;
   }
 
   /**
    * Compare unit with entity in similar indexed way
    * 
    * @protected
-   * @param {IServiceEntity} entity 
+   * @param {Service} entity 
    * @returns {number} 
    * @memberof BaseCompare
    */
-  protected similarCompare(entity : IServiceEntity) : number {
+  protected similarCompare(entity : Service) : number {
     const unit = this.unit;
     const entityName = entity.name.toLowerCase();
     const diceThreshold = this.compareSettings.thresholds.dice;
@@ -205,7 +206,7 @@ abstract class Compare {
   /**
    * Returns the related objects
    * 
-   * @returns {List<Relation>} 
+   * @returns {List<CompareRelation>} 
    * @memberof BaseCompare
    */
   public getRelatedByRank() {

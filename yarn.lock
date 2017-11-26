@@ -225,7 +225,7 @@ axios@^0.17.1:
     follow-redirects "^1.2.5"
     is-buffer "^1.1.5"
 
-babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
+babel-code-frame@^6.20.0, babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
   dependencies:
@@ -1202,7 +1202,7 @@ detect-indent@^4.0.0:
   dependencies:
     repeating "^2.0.0"
 
-diff@^3.2.0:
+diff@^3.0.1, diff@^3.2.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.4.0.tgz#b1d85507daf3964828de54b37d0d73ba67dda56c"
 
@@ -2922,7 +2922,7 @@ require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
 
-resolve@^1.1.6:
+resolve@^1.1.6, resolve@^1.1.7:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:
@@ -3274,6 +3274,19 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
+ts-lint@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/ts-lint/-/ts-lint-4.5.1.tgz#9c22b7b7b862b67324dd1bd213a845c03a7fb8c0"
+  dependencies:
+    babel-code-frame "^6.20.0"
+    colors "^1.1.2"
+    diff "^3.0.1"
+    findup-sync "~0.3.0"
+    glob "^7.1.1"
+    optimist "~0.6.0"
+    resolve "^1.1.7"
+    tsutils "^1.1.0"
+
 ts-loader@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-3.1.1.tgz#602d93c12029eaf8fa1ee478a90785d40c5f6658"
@@ -3331,7 +3344,7 @@ tslint@~5.1.0:
     semver "^5.3.0"
     tsutils "^1.4.0"
 
-tsutils@^1.4.0:
+tsutils@^1.1.0, tsutils@^1.4.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-1.9.1.tgz#b9f9ab44e55af9681831d5f28d0aeeaf5c750cb0"
 

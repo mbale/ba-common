@@ -1,6 +1,6 @@
-import { IServiceEntity } from './types';
+import { Service } from './types';
 import { ObjectID } from 'typeorm';
-declare abstract class ServiceEntity implements IServiceEntity {
+declare abstract class ServiceEntity implements Service {
     _id: ObjectID;
     name: string;
     _keywords: string[];

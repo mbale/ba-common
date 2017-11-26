@@ -13,7 +13,7 @@ export enum CompareModes {
  * 
  * @interface Relation
  */
-export interface Relation {
+export interface CompareRelation {
   /**
    * Entity Id which unit is related to
    * 
@@ -33,10 +33,10 @@ export interface Relation {
    * KeyType which shows what key is our base on comparison
    * only during strict
    * 
-   * @type {(MatchType.MainIdentifier | MatchType.KeywordIdentifier)}
+   * @type {(CompareMatchType.MainIdentifier | CompareMatchType.KeywordIdentifier)}
    * @memberof RelatedEntity
    */
-  keyType? : MatchType.MainIdentifier | MatchType.KeywordIdentifier;
+  keyType? : CompareMatchType.MainIdentifier | CompareMatchType.KeywordIdentifier;
   /**
    * Contains of the summed indexes of relativeness
    * only during similar
@@ -52,7 +52,7 @@ export interface Relation {
  * 
  * @enum {number}
  */
-export enum MatchType {
+export enum CompareMatchType {
   MainIdentifier, KeywordIdentifier, NotFound,
 }
 
@@ -64,7 +64,7 @@ export enum MatchType {
  * @export
  * @interface Thresholds
  */
-export interface Thresholds {
+export interface CompareThresholds {
   dice: number;
   levenshtein: number;
 }
@@ -87,5 +87,5 @@ export enum CompareMode {
  */
 export interface CompareSettings {
   mode : CompareMode;
-  thresholds : Thresholds;
+  thresholds : CompareThresholds;
 }

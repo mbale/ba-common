@@ -28,7 +28,8 @@ export class AppError extends Error {
  * @param {typeof Container} container 
  * @returns 
  */
-export function DIConnection(mongodbURL : string, entities : Function[], container : typeof Container) {
+export function dIConnection(
+  mongodbURL : string, entities : Function[], container : typeof Container) {
   if (!mongodbURL) {
     throw new Error('Missing mongodb URL');
   }
@@ -44,7 +45,7 @@ export function DIConnection(mongodbURL : string, entities : Function[], contain
       const connection = createConnection(dbOptions);
       container.registerHandler({ object, propertyName, index, value: () => connection }); 
     } catch (error) {
-      console.log(error)
+      throw error;
     }
   };
 }
@@ -53,7 +54,7 @@ export interface QueueDefinition {
 
 }
 
-export async function DIRedisQueues(REDIS_URL : string, queues : QueueDefinition) {
+export async function dIRedisQueues(REDIS_URL : string, queues : QueueDefinition) {
 
 }
 

@@ -1,6 +1,6 @@
-import { MatchType, Relation, CompareSettings } from './types';
+import { CompareMatchType, CompareRelation, CompareSettings } from './types';
 import { List } from 'immutable';
-import { IServiceEntity } from '../entity/types';
+import { Service } from '../entity/types';
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *
@@ -8,7 +8,7 @@ import { IServiceEntity } from '../entity/types';
  * @class Compare
  */
 declare abstract class Compare {
-    protected relatedEntities: List<Relation>;
+    protected relatedEntities: List<CompareRelation>;
     /**
      * The string which we compare
      *
@@ -40,7 +40,7 @@ declare abstract class Compare {
      * @param {ServiceEntity} entity
      * @memberof BaseCompare
      */
-    runInSequence(unit: string, entity: IServiceEntity): boolean;
+    runInSequence(unit: string, entity: Service): boolean;
     /**
      * Get similarity index between two unit
      *
@@ -55,26 +55,26 @@ declare abstract class Compare {
      * Compare unit with entity in strict way
      *
      * @protected
-     * @param {IServiceEntity} entity
-     * @returns {MatchType}
+     * @param {Service} entity
+     * @returns {CompareMatchType}
      * @memberof BaseCompare
      */
-    protected strictCompare(entity: IServiceEntity): MatchType;
+    protected strictCompare(entity: Service): CompareMatchType;
     /**
      * Compare unit with entity in similar indexed way
      *
      * @protected
-     * @param {IServiceEntity} entity
+     * @param {Service} entity
      * @returns {number}
      * @memberof BaseCompare
      */
-    protected similarCompare(entity: IServiceEntity): number;
+    protected similarCompare(entity: Service): number;
     /**
      * Returns the related objects
      *
-     * @returns {List<Relation>}
+     * @returns {List<CompareRelation>}
      * @memberof BaseCompare
      */
-    getRelatedByRank(): Relation[];
+    getRelatedByRank(): CompareRelation[];
 }
 export default Compare;

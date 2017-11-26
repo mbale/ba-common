@@ -1,4 +1,4 @@
-import { IServiceEntity } from './types';
+import { Service } from './types';
 import {
   ObjectID,
   ObjectIdColumn,
@@ -6,7 +6,7 @@ import {
   BeforeUpdate,
 } from 'typeorm';
 
-abstract class ServiceEntity implements IServiceEntity {
+abstract class ServiceEntity implements Service {
   @ObjectIdColumn()
   _id : ObjectID;
 

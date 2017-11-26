@@ -18,7 +18,7 @@ export declare class AppError extends Error {
  * @param {typeof Container} container
  * @returns
  */
-export declare function DIConnection(mongodbURL: string, entities: Function[], container: typeof Container): (object: object, propertyName: string, index?: number) => void;
+export declare function dIConnection(mongodbURL: string, entities: Function[], container: typeof Container): (object: object, propertyName: string, index?: number) => void;
 export interface QueueDefinition {
 }
-export declare function DIRedisQueues(REDIS_URL: string, queues: QueueDefinition): Promise<void>;
+export declare function dIRedisQueues(REDIS_URL: string, queues: QueueDefinition): Promise<void>;
