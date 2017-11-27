@@ -37,14 +37,14 @@ export interface MatchOdds {
 }
 
 export enum MatchOddsType {
-  MoneyLine = 'moneyline',
-  Spread = 'spread',
-  Total = 'total',
+  MoneyLine,
+  Spread,
+  Total,
 }
 
 export enum MatchSourceType {
-  Pinnacle = 'pinnacle',
-  Oddsgg = 'oddsgg',
+  Pinnacle,
+  Oddsgg,
 }
 
 export interface MatchSource {
@@ -55,24 +55,24 @@ export interface MatchSource {
 }
 
 export enum MatchMapType {
-  Match = 'match',
-  Map1  = 'map1',
-  Map2  = 'map2',
-  Map3  = 'map3',
-  Map4  = 'map4',
-  Map5  = 'map5',
-  Map6  = 'map6',
-  Map7 = 'map7',
-  Unknown = 'unknown',
+  Match,
+  Map1,
+  Map2,
+  Map3,
+  Map4,
+  Map5,
+  Map6,
+  Map7,
+  Unknown,
 }
 
 export enum MatchStatusType {
-  Settled = 'settled',
-  ReSettled = 'resettled',
-  Canceled = 'canceled',
-  ReSettleCancelled = 'resettlecancelled',
-  Deleted = 'deleted',
-  Unknown = 'unknown',
+  Settled,
+  ReSettled,
+  Canceled,
+  ReSettleCancelled,
+  Deleted,
+  Unknown,
 }
 
 export interface MatchUpdate {
