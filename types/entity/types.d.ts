@@ -101,4 +101,5 @@ export interface League {
 }
 export interface Game {
     name: string;
+    slug: string;
 }
