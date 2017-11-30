@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CompareSettings | ba-common</title>
+	<title>Service | ba-common</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_compare_types_.html">&quot;compare/types&quot;</a>
+					<a href="../modules/_entity_types_.html">&quot;entity/types&quot;</a>
 				</li>
 				<li>
-					<a href="_compare_types_.comparesettings.html">CompareSettings</a>
+					<a href="_entity_types_.service.html">Service</a>
 				</li>
 			</ul>
-			<h1>Interface CompareSettings</h1>
+			<h1>Interface Service</h1>
 		</div>
 	</div>
 </header>
@@ -72,13 +72,14 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Compare options object for compare service</p>
+						<p>We need the type only during compile time
+						We don&#39;t want to include the whole class all the time</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>export</dt>
 						<dd></dd>
 						<dt>interface</dt>
-						<dd><p>CompareSettings</p>
+						<dd><p>Service</p>
 						</dd>
 					</dl>
 				</div>
@@ -87,8 +88,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CompareSettings</span>
+						<span class="target">Service</span>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implemented by</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../classes/_entity_entity_.serviceentity.html" class="tsd-signature-type">ServiceEntity</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -98,8 +105,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparesettings.html#mode" class="tsd-kind-icon">mode</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparesettings.html#thresholds" class="tsd-kind-icon">thresholds</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entity_types_.service.html#_createdat" class="tsd-kind-icon">_created<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entity_types_.service.html#_id" class="tsd-kind-icon">_id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entity_types_.service.html#_keywords" class="tsd-kind-icon">_keywords</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entity_types_.service.html#_updatedat" class="tsd-kind-icon">_updated<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_entity_types_.service.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,22 +118,52 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="mode" class="tsd-anchor"></a>
-					<h3>mode</h3>
-					<div class="tsd-signature tsd-kind-icon">mode<span class="tsd-signature-symbol">:</span> <a href="../enums/_compare_types_.comparemode.html" class="tsd-signature-type">CompareMode</a></div>
+					<a name="_createdat" class="tsd-anchor"></a>
+					<h3>_created<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">_created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L89">compare/types.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/entity/types.ts#L13">entity/types.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="thresholds" class="tsd-anchor"></a>
-					<h3>thresholds</h3>
-					<div class="tsd-signature tsd-kind-icon">thresholds<span class="tsd-signature-symbol">:</span> <a href="_compare_types_.comparethresholds.html" class="tsd-signature-type">CompareThresholds</a></div>
+					<a name="_id" class="tsd-anchor"></a>
+					<h3>_id</h3>
+					<div class="tsd-signature tsd-kind-icon">_id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ObjectID</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L90">compare/types.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/entity/types.ts#L10">entity/types.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="_keywords" class="tsd-anchor"></a>
+					<h3>_keywords</h3>
+					<div class="tsd-signature tsd-kind-icon">_keywords<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/entity/types.ts#L12">entity/types.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="_updatedat" class="tsd-anchor"></a>
+					<h3>_updated<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">_updated<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/entity/types.ts#L14">entity/types.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/entity/types.ts#L11">entity/types.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -138,13 +178,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_compare_compare_.html">"compare/compare"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_compare_types_.html">"compare/types"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_entity_entity_.html">"entity/entity"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_entity_types_.html">"entity/types"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -167,34 +207,70 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_compare_types_.comparematchtype.html" class="tsd-kind-icon">Compare<wbr>Match<wbr>Type</a>
+						<a href="../enums/_entity_types_.matchmaptype.html" class="tsd-kind-icon">Match<wbr>Map<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_compare_types_.comparemode.html" class="tsd-kind-icon">Compare<wbr>Mode</a>
+						<a href="../enums/_entity_types_.matchoddstype.html" class="tsd-kind-icon">Match<wbr>Odds<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_compare_types_.comparemodes.html" class="tsd-kind-icon">Compare<wbr>Modes</a>
+						<a href="../enums/_entity_types_.matchsourcetype.html" class="tsd-kind-icon">Match<wbr>Source<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_entity_types_.matchstatustype.html" class="tsd-kind-icon">Match<wbr>Status<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_entity_types_.teamsocialsitetype.html" class="tsd-kind-icon">Team<wbr>Social<wbr>Site<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_compare_types_.comparerelation.html" class="tsd-kind-icon">Compare<wbr>Relation</a>
+						<a href="_entity_types_.game.html" class="tsd-kind-icon">Game</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.league.html" class="tsd-kind-icon">League</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.match.html" class="tsd-kind-icon">Match</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.matchodds.html" class="tsd-kind-icon">Match<wbr>Odds</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.matchsource.html" class="tsd-kind-icon">Match<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.matchupdate.html" class="tsd-kind-icon">Match<wbr>Update</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_compare_types_.comparesettings.html" class="tsd-kind-icon">Compare<wbr>Settings</a>
+						<a href="_entity_types_.service.html" class="tsd-kind-icon">Service</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_compare_types_.comparesettings.html#mode" class="tsd-kind-icon">mode</a>
+								<a href="_entity_types_.service.html#_createdat" class="tsd-kind-icon">_created<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_compare_types_.comparesettings.html#thresholds" class="tsd-kind-icon">thresholds</a>
+								<a href="_entity_types_.service.html#_id" class="tsd-kind-icon">_id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entity_types_.service.html#_keywords" class="tsd-kind-icon">_keywords</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entity_types_.service.html#_updatedat" class="tsd-kind-icon">_updated<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_entity_types_.service.html#name" class="tsd-kind-icon">name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_compare_types_.comparethresholds.html" class="tsd-kind-icon">Compare<wbr>Thresholds</a>
+						<a href="_entity_types_.team.html" class="tsd-kind-icon">Team</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.teammember.html" class="tsd-kind-icon">Team<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_entity_types_.teamsocialsite.html" class="tsd-kind-icon">Team<wbr>Social<wbr>Site</a>
 					</li>
 				</ul>
 			</nav>

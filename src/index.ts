@@ -1,7 +1,8 @@
-import 'reflect-metadata';
 import Compare from './compare/compare';
-import ServiceEntity from './entity/entity';
 import HTTPService from './http-service/http-service';
+import ServiceEntity from './entity/entity';
+import { AppError, dIConnection } from './utilities';
+import 'reflect-metadata';
 import {
   Game,
   League,
@@ -20,6 +21,9 @@ import {
   TeamSocialSiteType,
 } from './entity/types';
 import { 
+  GetMatchesQueryParams,
+} from './http-service/types';
+import { 
   CompareModes, 
   CompareMode, 
   CompareSettings,
@@ -27,7 +31,6 @@ import {
   CompareRelation, 
   CompareThresholds,
 } from './compare/types';
-import { AppError, dIConnection } from './utilities';
 
 export {
   Compare,
@@ -51,6 +54,7 @@ export {
   TeamMember, 
   TeamSocialSite, 
   TeamSocialSiteType,
+  GetMatchesQueryParams,
   League,
   Game,
   AppError,

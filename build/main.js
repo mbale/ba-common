@@ -127,14 +127,17 @@ module.exports = __webpack_require__(3);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(4);
-const compare_1 = __webpack_require__(5);
+const compare_1 = __webpack_require__(4);
 exports.Compare = compare_1.default;
-const entity_1 = __webpack_require__(8);
-exports.ServiceEntity = entity_1.default;
-const http_service_1 = __webpack_require__(9);
+const http_service_1 = __webpack_require__(7);
 exports.HTTPService = http_service_1.default;
-const types_1 = __webpack_require__(12);
+const entity_1 = __webpack_require__(10);
+exports.ServiceEntity = entity_1.default;
+const utilities_1 = __webpack_require__(11);
+exports.AppError = utilities_1.AppError;
+exports.dIConnection = utilities_1.dIConnection;
+__webpack_require__(12);
+const types_1 = __webpack_require__(13);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -144,27 +147,18 @@ const types_2 = __webpack_require__(0);
 exports.CompareModes = types_2.CompareModes;
 exports.CompareMode = types_2.CompareMode;
 exports.CompareMatchType = types_2.CompareMatchType;
-const utilities_1 = __webpack_require__(13);
-exports.AppError = utilities_1.AppError;
-exports.dIConnection = utilities_1.dIConnection;
 
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("reflect-metadata");
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const types_1 = __webpack_require__(0);
-const immutable_1 = __webpack_require__(6);
-const dice_1 = __webpack_require__(7);
+const immutable_1 = __webpack_require__(5);
+const dice_1 = __webpack_require__(6);
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *
@@ -329,82 +323,26 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("immutable");
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("talisman/metrics/distance/dice");
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(1);
-class ServiceEntity {
-    constructor() {
-        this._keywords = [];
-        this._createdAt = new Date();
-        this._updatedAt = new Date();
-    }
-    updateModificationDate() {
-        this._updatedAt = new Date();
-    }
-}
-__decorate([
-    typeorm_1.ObjectIdColumn(),
-    __metadata("design:type", typeorm_1.ObjectID)
-], ServiceEntity.prototype, "_id", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], ServiceEntity.prototype, "name", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Array)
-], ServiceEntity.prototype, "_keywords", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Date)
-], ServiceEntity.prototype, "_createdAt", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Date)
-], ServiceEntity.prototype, "_updatedAt", void 0);
-__decorate([
-    typeorm_1.BeforeUpdate(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ServiceEntity.prototype, "updateModificationDate", null);
-exports.default = ServiceEntity;
-
-
-/***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __webpack_require__(10);
-const qs = __webpack_require__(11);
+const axios_1 = __webpack_require__(8);
+const qs = __webpack_require__(9);
 /**
  * Default base class for each service communicator
  *
@@ -460,65 +398,75 @@ exports.default = HTTPService;
 
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = require("qs");
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var MatchOddsType;
-(function (MatchOddsType) {
-    MatchOddsType[MatchOddsType["MoneyLine"] = 0] = "MoneyLine";
-    MatchOddsType[MatchOddsType["Spread"] = 1] = "Spread";
-    MatchOddsType[MatchOddsType["Total"] = 2] = "Total";
-})(MatchOddsType = exports.MatchOddsType || (exports.MatchOddsType = {}));
-var MatchSourceType;
-(function (MatchSourceType) {
-    MatchSourceType[MatchSourceType["Pinnacle"] = 0] = "Pinnacle";
-    MatchSourceType[MatchSourceType["Oddsgg"] = 1] = "Oddsgg";
-})(MatchSourceType = exports.MatchSourceType || (exports.MatchSourceType = {}));
-var MatchMapType;
-(function (MatchMapType) {
-    MatchMapType[MatchMapType["Match"] = 0] = "Match";
-    MatchMapType[MatchMapType["Map1"] = 1] = "Map1";
-    MatchMapType[MatchMapType["Map2"] = 2] = "Map2";
-    MatchMapType[MatchMapType["Map3"] = 3] = "Map3";
-    MatchMapType[MatchMapType["Map4"] = 4] = "Map4";
-    MatchMapType[MatchMapType["Map5"] = 5] = "Map5";
-    MatchMapType[MatchMapType["Map6"] = 6] = "Map6";
-    MatchMapType[MatchMapType["Map7"] = 7] = "Map7";
-    MatchMapType[MatchMapType["Unknown"] = 8] = "Unknown";
-})(MatchMapType = exports.MatchMapType || (exports.MatchMapType = {}));
-var MatchStatusType;
-(function (MatchStatusType) {
-    MatchStatusType[MatchStatusType["Settled"] = 0] = "Settled";
-    MatchStatusType[MatchStatusType["ReSettled"] = 1] = "ReSettled";
-    MatchStatusType[MatchStatusType["Canceled"] = 2] = "Canceled";
-    MatchStatusType[MatchStatusType["ReSettleCancelled"] = 3] = "ReSettleCancelled";
-    MatchStatusType[MatchStatusType["Deleted"] = 4] = "Deleted";
-    MatchStatusType[MatchStatusType["Unknown"] = 5] = "Unknown";
-})(MatchStatusType = exports.MatchStatusType || (exports.MatchStatusType = {}));
-var TeamSocialSiteType;
-(function (TeamSocialSiteType) {
-    TeamSocialSiteType[TeamSocialSiteType["Facebook"] = 0] = "Facebook";
-    TeamSocialSiteType[TeamSocialSiteType["Twitter"] = 1] = "Twitter";
-})(TeamSocialSiteType = exports.TeamSocialSiteType || (exports.TeamSocialSiteType = {}));
+const typeorm_1 = __webpack_require__(1);
+class ServiceEntity {
+    constructor() {
+        this._keywords = [];
+        this._createdAt = new Date();
+        this._updatedAt = new Date();
+    }
+    updateModificationDate() {
+        this._updatedAt = new Date();
+    }
+}
+__decorate([
+    typeorm_1.ObjectIdColumn(),
+    __metadata("design:type", typeorm_1.ObjectID)
+], ServiceEntity.prototype, "_id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], ServiceEntity.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Array)
+], ServiceEntity.prototype, "_keywords", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Date)
+], ServiceEntity.prototype, "_createdAt", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Date)
+], ServiceEntity.prototype, "_updatedAt", void 0);
+__decorate([
+    typeorm_1.BeforeUpdate(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ServiceEntity.prototype, "updateModificationDate", null);
+exports.default = ServiceEntity;
 
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -574,6 +522,58 @@ exports.dIConnection = dIConnection;
 async function dIRedisQueues(REDIS_URL, queues) {
 }
 exports.dIRedisQueues = dIRedisQueues;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = require("reflect-metadata");
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var MatchOddsType;
+(function (MatchOddsType) {
+    MatchOddsType[MatchOddsType["MoneyLine"] = 0] = "MoneyLine";
+    MatchOddsType[MatchOddsType["Spread"] = 1] = "Spread";
+    MatchOddsType[MatchOddsType["Total"] = 2] = "Total";
+})(MatchOddsType = exports.MatchOddsType || (exports.MatchOddsType = {}));
+var MatchSourceType;
+(function (MatchSourceType) {
+    MatchSourceType[MatchSourceType["Pinnacle"] = 0] = "Pinnacle";
+    MatchSourceType[MatchSourceType["Oddsgg"] = 1] = "Oddsgg";
+})(MatchSourceType = exports.MatchSourceType || (exports.MatchSourceType = {}));
+var MatchMapType;
+(function (MatchMapType) {
+    MatchMapType[MatchMapType["Match"] = 0] = "Match";
+    MatchMapType[MatchMapType["Map1"] = 1] = "Map1";
+    MatchMapType[MatchMapType["Map2"] = 2] = "Map2";
+    MatchMapType[MatchMapType["Map3"] = 3] = "Map3";
+    MatchMapType[MatchMapType["Map4"] = 4] = "Map4";
+    MatchMapType[MatchMapType["Map5"] = 5] = "Map5";
+    MatchMapType[MatchMapType["Map6"] = 6] = "Map6";
+    MatchMapType[MatchMapType["Map7"] = 7] = "Map7";
+    MatchMapType[MatchMapType["Unknown"] = 8] = "Unknown";
+})(MatchMapType = exports.MatchMapType || (exports.MatchMapType = {}));
+var MatchStatusType;
+(function (MatchStatusType) {
+    MatchStatusType[MatchStatusType["Settled"] = 0] = "Settled";
+    MatchStatusType[MatchStatusType["ReSettled"] = 1] = "ReSettled";
+    MatchStatusType[MatchStatusType["Canceled"] = 2] = "Canceled";
+    MatchStatusType[MatchStatusType["ReSettleCancelled"] = 3] = "ReSettleCancelled";
+    MatchStatusType[MatchStatusType["Deleted"] = 4] = "Deleted";
+    MatchStatusType[MatchStatusType["Unknown"] = 5] = "Unknown";
+})(MatchStatusType = exports.MatchStatusType || (exports.MatchStatusType = {}));
+var TeamSocialSiteType;
+(function (TeamSocialSiteType) {
+    TeamSocialSiteType[TeamSocialSiteType["Facebook"] = 0] = "Facebook";
+    TeamSocialSiteType[TeamSocialSiteType["Twitter"] = 1] = "Twitter";
+})(TeamSocialSiteType = exports.TeamSocialSiteType || (exports.TeamSocialSiteType = {}));
 
 
 /***/ })

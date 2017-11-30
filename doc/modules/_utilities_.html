@@ -77,9 +77,16 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_utilities_.queuedefinition.html" class="tsd-kind-icon">Queue<wbr>Definition</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utilities_.html#connection" class="tsd-kind-icon">connection</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utilities_.html#diconnection" class="tsd-kind-icon">dIConnection</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_utilities_.html#diredisqueues" class="tsd-kind-icon">dIRedis<wbr>Queues</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,16 +95,16 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="connection" class="tsd-anchor"></a>
-					<h3>connection</h3>
+					<a name="diconnection" class="tsd-anchor"></a>
+					<h3>dIConnection</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">(</span>mongodbURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entities<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
+						<li class="tsd-signature tsd-kind-icon">dIConnection<span class="tsd-signature-symbol">(</span>mongodbURL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entities<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span>, container<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/00b96fc/src/utilities.ts#L30">utilities.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/utilities.ts#L31">utilities.ts:31</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -117,8 +124,37 @@
 								<li>
 									<h5>entities: <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
+								<li>
+									<h5>container: <span class="tsd-signature-type">Container</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="diredisqueues" class="tsd-anchor"></a>
+					<h3>dIRedis<wbr>Queues</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">dIRedis<wbr>Queues<span class="tsd-signature-symbol">(</span>REDIS_URL<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, queues<span class="tsd-signature-symbol">: </span><a href="../interfaces/_utilities_.queuedefinition.html" class="tsd-signature-type">QueueDefinition</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/utilities.ts#L57">utilities.ts:57</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>REDIS_URL: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>queues: <a href="../interfaces/_utilities_.queuedefinition.html" class="tsd-signature-type">QueueDefinition</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -146,6 +182,9 @@
 						<a href="_http_service_http_service_.html">"http-<wbr>service/http-<wbr>service"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_http_service_types_.html">"http-<wbr>service/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -161,8 +200,14 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/_utilities_.apperror.html" class="tsd-kind-icon">App<wbr>Error</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_utilities_.queuedefinition.html" class="tsd-kind-icon">Queue<wbr>Definition</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_utilities_.html#connection" class="tsd-kind-icon">connection</a>
+						<a href="_utilities_.html#diconnection" class="tsd-kind-icon">dIConnection</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_utilities_.html#diredisqueues" class="tsd-kind-icon">dIRedis<wbr>Queues</a>
 					</li>
 				</ul>
 			</nav>

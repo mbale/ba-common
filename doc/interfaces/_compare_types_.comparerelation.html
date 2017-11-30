@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CompareSettings | ba-common</title>
+	<title>CompareRelation | ba-common</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_compare_types_.html">&quot;compare/types&quot;</a>
 				</li>
 				<li>
-					<a href="_compare_types_.comparesettings.html">CompareSettings</a>
+					<a href="_compare_types_.comparerelation.html">CompareRelation</a>
 				</li>
 			</ul>
-			<h1>Interface CompareSettings</h1>
+			<h1>Interface CompareRelation</h1>
 		</div>
 	</div>
 </header>
@@ -72,13 +72,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Compare options object for compare service</p>
+						<p>Relation object between unit &amp; entity</p>
 					</div>
 					<dl class="tsd-comment-tags">
-						<dt>export</dt>
-						<dd></dd>
 						<dt>interface</dt>
-						<dd><p>CompareSettings</p>
+						<dd><p>Relation</p>
 						</dd>
 					</dl>
 				</div>
@@ -87,7 +85,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CompareSettings</span>
+						<span class="target">CompareRelation</span>
 					</li>
 				</ul>
 			</section>
@@ -98,8 +96,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparesettings.html#mode" class="tsd-kind-icon">mode</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparesettings.html#thresholds" class="tsd-kind-icon">thresholds</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparerelation.html#entityid" class="tsd-kind-icon">entity<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparerelation.html#keytype" class="tsd-kind-icon">key<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparerelation.html#relationtype" class="tsd-kind-icon">relation<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_compare_types_.comparerelation.html#summedindex" class="tsd-kind-icon">summed<wbr>Index</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,24 +108,99 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="mode" class="tsd-anchor"></a>
-					<h3>mode</h3>
-					<div class="tsd-signature tsd-kind-icon">mode<span class="tsd-signature-symbol">:</span> <a href="../enums/_compare_types_.comparemode.html" class="tsd-signature-type">CompareMode</a></div>
+					<a name="entityid" class="tsd-anchor"></a>
+					<h3>entity<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">entity<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ObjectID</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L89">compare/types.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L23">compare/types.ts:23</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Entity Id which unit is related to</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{ObjectID}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>RelatedEntity</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="thresholds" class="tsd-anchor"></a>
-					<h3>thresholds</h3>
-					<div class="tsd-signature tsd-kind-icon">thresholds<span class="tsd-signature-symbol">:</span> <a href="_compare_types_.comparethresholds.html" class="tsd-signature-type">CompareThresholds</a></div>
+					<a name="keytype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> key<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">key<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_compare_types_.comparematchtype.html#mainidentifier" class="tsd-signature-type">MainIdentifier</a><span class="tsd-signature-symbol"> | </span><a href="../enums/_compare_types_.comparematchtype.html#keywordidentifier" class="tsd-signature-type">KeywordIdentifier</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L90">compare/types.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L39">compare/types.ts:39</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>KeyType which shows what key is our base on comparison
+							only during strict</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{(CompareMatchType.MainIdentifier | CompareMatchType.KeywordIdentifier)}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>RelatedEntity</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="relationtype" class="tsd-anchor"></a>
+					<h3>relation<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">relation<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_compare_types_.comparemodes.html" class="tsd-signature-type">CompareModes</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L31">compare/types.ts:31</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Relation type which shows how it relates in comparison
+							strict | similar</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{CompareModes}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>RelatedEntity</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="summedindex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> summed<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">summed<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MainBase/ba-common/blob/74733cd/src/compare/types.ts#L47">compare/types.ts:47</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains of the summed indexes of relativeness
+							only during similar</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>RelatedEntity</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -175,24 +250,30 @@
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
 						<a href="../enums/_compare_types_.comparemodes.html" class="tsd-kind-icon">Compare<wbr>Modes</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_compare_types_.comparerelation.html" class="tsd-kind-icon">Compare<wbr>Relation</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_compare_types_.comparesettings.html" class="tsd-kind-icon">Compare<wbr>Settings</a>
+						<a href="_compare_types_.comparerelation.html" class="tsd-kind-icon">Compare<wbr>Relation</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_compare_types_.comparesettings.html#mode" class="tsd-kind-icon">mode</a>
+								<a href="_compare_types_.comparerelation.html#entityid" class="tsd-kind-icon">entity<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_compare_types_.comparesettings.html#thresholds" class="tsd-kind-icon">thresholds</a>
+								<a href="_compare_types_.comparerelation.html#keytype" class="tsd-kind-icon">key<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_compare_types_.comparerelation.html#relationtype" class="tsd-kind-icon">relation<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_compare_types_.comparerelation.html#summedindex" class="tsd-kind-icon">summed<wbr>Index</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_compare_types_.comparesettings.html" class="tsd-kind-icon">Compare<wbr>Settings</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_compare_types_.comparethresholds.html" class="tsd-kind-icon">Compare<wbr>Thresholds</a>
 					</li>
