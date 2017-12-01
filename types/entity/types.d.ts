@@ -30,13 +30,13 @@ export interface MatchOdds {
     _id: ObjectID;
 }
 export declare enum MatchOddsType {
-    MoneyLine = 0,
-    Spread = 1,
-    Total = 2,
+    MoneyLine = "moneyline",
+    Spread = "spread",
+    Total = "total",
 }
 export declare enum MatchSourceType {
-    Pinnacle = 0,
-    Oddsgg = 1,
+    Pinnacle = "pinnacle",
+    Oddsgg = "oddsgg",
 }
 export interface MatchSource {
     type: MatchSourceType;
@@ -45,23 +45,23 @@ export interface MatchSource {
     fetchedAt: Date;
 }
 export declare enum MatchMapType {
-    Match = 0,
-    Map1 = 1,
-    Map2 = 2,
-    Map3 = 3,
-    Map4 = 4,
-    Map5 = 5,
-    Map6 = 6,
-    Map7 = 7,
-    Unknown = 8,
+    Match = "match",
+    Map1 = "map1",
+    Map2 = "map2",
+    Map3 = "map3",
+    Map4 = "map4",
+    Map5 = "map5",
+    Map6 = "map6",
+    Map7 = "map7",
+    Unknown = "unknown",
 }
 export declare enum MatchStatusType {
-    Settled = 0,
-    ReSettled = 1,
-    Canceled = 2,
-    ReSettleCancelled = 3,
-    Deleted = 4,
-    Unknown = 5,
+    Settled = "settled",
+    ReSettled = "resettled",
+    Canceled = "canceled",
+    ReSettleCancelled = "resettlecancelled",
+    Deleted = "deleted",
+    Unknown = "unknown",
 }
 export interface MatchUpdate {
     mapType: MatchMapType;

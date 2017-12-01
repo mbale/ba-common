@@ -539,35 +539,35 @@ module.exports = require("reflect-metadata");
 Object.defineProperty(exports, "__esModule", { value: true });
 var MatchOddsType;
 (function (MatchOddsType) {
-    MatchOddsType[MatchOddsType["MoneyLine"] = 0] = "MoneyLine";
-    MatchOddsType[MatchOddsType["Spread"] = 1] = "Spread";
-    MatchOddsType[MatchOddsType["Total"] = 2] = "Total";
+    MatchOddsType["MoneyLine"] = "moneyline";
+    MatchOddsType["Spread"] = "spread";
+    MatchOddsType["Total"] = "total";
 })(MatchOddsType = exports.MatchOddsType || (exports.MatchOddsType = {}));
 var MatchSourceType;
 (function (MatchSourceType) {
-    MatchSourceType[MatchSourceType["Pinnacle"] = 0] = "Pinnacle";
-    MatchSourceType[MatchSourceType["Oddsgg"] = 1] = "Oddsgg";
+    MatchSourceType["Pinnacle"] = "pinnacle";
+    MatchSourceType["Oddsgg"] = "oddsgg";
 })(MatchSourceType = exports.MatchSourceType || (exports.MatchSourceType = {}));
 var MatchMapType;
 (function (MatchMapType) {
-    MatchMapType[MatchMapType["Match"] = 0] = "Match";
-    MatchMapType[MatchMapType["Map1"] = 1] = "Map1";
-    MatchMapType[MatchMapType["Map2"] = 2] = "Map2";
-    MatchMapType[MatchMapType["Map3"] = 3] = "Map3";
-    MatchMapType[MatchMapType["Map4"] = 4] = "Map4";
-    MatchMapType[MatchMapType["Map5"] = 5] = "Map5";
-    MatchMapType[MatchMapType["Map6"] = 6] = "Map6";
-    MatchMapType[MatchMapType["Map7"] = 7] = "Map7";
-    MatchMapType[MatchMapType["Unknown"] = 8] = "Unknown";
+    MatchMapType["Match"] = "match";
+    MatchMapType["Map1"] = "map1";
+    MatchMapType["Map2"] = "map2";
+    MatchMapType["Map3"] = "map3";
+    MatchMapType["Map4"] = "map4";
+    MatchMapType["Map5"] = "map5";
+    MatchMapType["Map6"] = "map6";
+    MatchMapType["Map7"] = "map7";
+    MatchMapType["Unknown"] = "unknown";
 })(MatchMapType = exports.MatchMapType || (exports.MatchMapType = {}));
 var MatchStatusType;
 (function (MatchStatusType) {
-    MatchStatusType[MatchStatusType["Settled"] = 0] = "Settled";
-    MatchStatusType[MatchStatusType["ReSettled"] = 1] = "ReSettled";
-    MatchStatusType[MatchStatusType["Canceled"] = 2] = "Canceled";
-    MatchStatusType[MatchStatusType["ReSettleCancelled"] = 3] = "ReSettleCancelled";
-    MatchStatusType[MatchStatusType["Deleted"] = 4] = "Deleted";
-    MatchStatusType[MatchStatusType["Unknown"] = 5] = "Unknown";
+    MatchStatusType["Settled"] = "settled";
+    MatchStatusType["ReSettled"] = "resettled";
+    MatchStatusType["Canceled"] = "canceled";
+    MatchStatusType["ReSettleCancelled"] = "resettlecancelled";
+    MatchStatusType["Deleted"] = "deleted";
+    MatchStatusType["Unknown"] = "unknown";
 })(MatchStatusType = exports.MatchStatusType || (exports.MatchStatusType = {}));
 var TeamSocialSiteType;
 (function (TeamSocialSiteType) {

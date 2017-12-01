@@ -1,3 +1,4 @@
+import { MatchStatusType } from '../entity/types';
 import { ObjectID } from 'typeorm';
 /**
  * Queryparam interface for get matches
@@ -5,9 +6,9 @@ import { ObjectID } from 'typeorm';
  * @interface GetMatchesQueryParams
  */
 export interface GetMatchesQueryParams {
-    ids: ObjectID[];
-    limit: number;
-    page: number;
-    skip: number;
-    completed: boolean;
+    ids: ObjectID[] | ObjectID;
+    limit: string;
+    page: string;
+    skip: string;
+    statusType: MatchStatusType;
 }
