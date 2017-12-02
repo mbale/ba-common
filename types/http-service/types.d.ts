@@ -5,9 +5,9 @@ import { MatchStatusType } from '../entity/types';
  * @interface GetMatchesQueryParams
  */
 export interface GetMatchesQueryParams {
-    ids: string[] | string;
-    limit: string;
-    page: string;
-    skip: string;
-    statusType: MatchStatusType;
+    ids?: string[] | string;
+    limit?: string;
+    page?: string;
+    skip?: string;
+    statusType?: MatchStatusType;
 }
