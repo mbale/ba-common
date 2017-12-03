@@ -8,6 +8,9 @@ export interface GetMatchesQueryParams {
     ids?: string[] | string;
     limit?: string;
     page?: string;
-    skip?: string;
     statusType?: MatchStatusType;
+    gameId?: string;
+    homeTeamId?: string;
+    awayTeamId?: string;
+    leagueId?: string;
 }
