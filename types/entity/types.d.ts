@@ -62,6 +62,8 @@ export declare enum MatchStatusType {
     ReSettleCancelled = "resettlecancelled",
     Deleted = "deleted",
     Unknown = "unknown",
+    Upcoming = "upcoming",
+    Completed = "completed",
 }
 export interface MatchUpdate {
     mapType: MatchMapType;

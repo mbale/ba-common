@@ -73,6 +73,10 @@ export enum MatchStatusType {
   ReSettleCancelled = 'resettlecancelled',
   Deleted = 'deleted',
   Unknown = 'unknown',
+  // not in db
+  Upcoming = 'upcoming',
+  Completed = 'completed',
+
 }
 
 export interface MatchUpdate {

@@ -568,6 +568,9 @@ var MatchStatusType;
     MatchStatusType["ReSettleCancelled"] = "resettlecancelled";
     MatchStatusType["Deleted"] = "deleted";
     MatchStatusType["Unknown"] = "unknown";
+    // not in db
+    MatchStatusType["Upcoming"] = "upcoming";
+    MatchStatusType["Completed"] = "completed";
 })(MatchStatusType = exports.MatchStatusType || (exports.MatchStatusType = {}));
 var TeamSocialSiteType;
 (function (TeamSocialSiteType) {
