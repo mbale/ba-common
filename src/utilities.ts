@@ -1,9 +1,11 @@
 import { ConnectionOptions, createConnection } from 'typeorm';
 import { Container } from 'typedi';
 import * as Queue from 'bull';
+import { Queue as IQueue } from 'bull';
 import * as winston from 'winston';
 import 'winston-mongodb'; // inject
-import { WinstonMongoDBTransports } from 'winston-mongodb';
+import { WinstonMongoDBTransports } from 'winston-mongodb'; // due to typebug
+import { Map } from 'immutable';
 
 /**
  * BaseError
@@ -92,14 +94,18 @@ export function dILogger(mongodb_url: string): winston.LoggerInstance {
  * @param {winston.LoggerInstance} logger 
  * @returns {{}} 
  */
-export function dIRedisQueues(redis_url: string, queues: any, logger: winston.LoggerInstance): {} {
+export function dIRedisQueues(
+  redis_url: string, queues: any, logger: winston.LoggerInstance): Map<string, IQueue> {
   try {
+    const store = Map<string, IQueue>();
+    
     for (const [varName, queueName] of Object.entries(queues)) {
-      queues[varName] = new Queue(queueName, redis_url);
+      store.set(varName, new Queue(queueName, redis_url));
     }
 
+
     logger.info(`Redis's connected to ${redis_url}`);
-    return queues;
+    return store;
   } catch (error) {
     logger.log('error', error);
     throw error;

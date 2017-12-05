@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -111,23 +111,29 @@ var CompareMode;
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("typeorm");
+module.exports = require("immutable");
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(3);
-
+module.exports = require("typeorm");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(4);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const compare_1 = __webpack_require__(4);
+const compare_1 = __webpack_require__(5);
 exports.Compare = compare_1.default;
 const http_service_1 = __webpack_require__(7);
 exports.HTTPService = http_service_1.default;
@@ -152,14 +158,14 @@ exports.CompareMatchType = types_2.CompareMatchType;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const types_1 = __webpack_require__(0);
-const immutable_1 = __webpack_require__(5);
+const immutable_1 = __webpack_require__(1);
 const dice_1 = __webpack_require__(6);
 /**
  * Base abstract class that contains all core functionality for extending further compare services
@@ -325,12 +331,6 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("immutable");
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
@@ -427,7 +427,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(2);
 class ServiceEntity {
     constructor() {
         this._keywords = [];
@@ -474,10 +474,11 @@ exports.default = ServiceEntity;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(2);
 const Queue = __webpack_require__(12);
 const winston = __webpack_require__(13);
 __webpack_require__(14); // inject
+const immutable_1 = __webpack_require__(1);
 /**
  * BaseError
  *
@@ -561,11 +562,12 @@ exports.dILogger = dILogger;
  */
 function dIRedisQueues(redis_url, queues, logger) {
     try {
+        const store = immutable_1.Map();
         for (const [varName, queueName] of Object.entries(queues)) {
-            queues[varName] = new Queue(queueName, redis_url);
+            store.set(varName, new Queue(queueName, redis_url));
         }
         logger.info(`Redis's connected to ${redis_url}`);
-        return queues;
+        return store;
     }
     catch (error) {
         logger.log('error', error);
