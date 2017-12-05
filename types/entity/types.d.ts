@@ -102,6 +102,7 @@ export interface League {
     name: string;
 }
 export interface Game {
+    _id: ObjectID;
     name: string;
     slug: string;
 }

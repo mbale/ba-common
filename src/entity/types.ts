@@ -134,6 +134,7 @@ export interface League {
 */
 
 export interface Game {
+  _id: ObjectID;
   name : string;
   slug : string;
 }
