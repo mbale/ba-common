@@ -6,6 +6,7 @@ import * as winston from 'winston';
 import 'winston-mongodb'; // inject
 import { WinstonMongoDBTransports } from 'winston-mongodb'; // due to typebug
 import { Map } from 'immutable';
+import { Winston } from 'winston';
 
 /**
  * BaseError
@@ -65,25 +66,52 @@ export function dIConnection(
  * @param {string} mongodb_url 
  * @returns {winston.LoggerInstance} 
  */
-export function dILogger(mongodb_url: string): winston.LoggerInstance {
-  // winston mongodb has typebug
-  const transports = winston.transports as WinstonMongoDBTransports;
-  const logger = new winston.Logger({
-    transports: [
-      new (winston.transports.Console)({ level: 'info' }),
-      new transports.MongoDB({
-        level: 'error',
-        db: mongodb_url,
-        collection: 'logs',
-        storeHost: true, // origin of log (hostname)
-        tryReconnect: true, // we make sure we always log
-      }),
-    ],
-  });
+export function dILogger(mongodbURL : string, winston: Winston, container : typeof Container) {
+  if (!mongodbURL || !winston || !container) {
+    throw new Error('Missing dependencies');
+  }
+  return function (object : object, propertyName : string, index? : number) {
+    try {
+      // winston mongodb has typebug
+      const transports = winston.transports as WinstonMongoDBTransports;
+      const logger = new winston.Logger({
+        transports: [
+          new (winston.transports.Console)({ level: 'info' }),
+          new transports.MongoDB({
+            level: 'error',
+            db: mongodbURL,
+            collection: 'logs',
+            storeHost: true, // origin of log (hostname)
+            tryReconnect: true, // we make sure we always log
+          }),
+        ],
+      });
 
-  logger.log('info', `Logger is connected to ${mongodb_url}`);
-  return logger;
+      container.registerHandler({ object, propertyName, index, value: () => logger }); 
+    } catch (error) {
+      throw error;
+    }
+  };
 }
+// export function dILogger(mongodb_url: string): winston.LoggerInstance {
+//   // winston mongodb has typebug
+//   const transports = winston.transports as WinstonMongoDBTransports;
+//   const logger = new winston.Logger({
+//     transports: [
+//       new (winston.transports.Console)({ level: 'info' }),
+//       new transports.MongoDB({
+//         level: 'error',
+//         db: mongodb_url,
+//         collection: 'logs',
+//         storeHost: true, // origin of log (hostname)
+//         tryReconnect: true, // we make sure we always log
+//       }),
+//     ],
+//   });
+
+//   logger.log('info', `Logger is connected to ${mongodb_url}`);
+//   return logger;
+// }
 
 /**
  * Injectable Redis interface

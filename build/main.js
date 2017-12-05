@@ -144,8 +144,8 @@ exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
 exports.dILogger = utilities_1.dILogger;
 exports.dIRedisQueues = utilities_1.dIRedisQueues;
-__webpack_require__(15);
-const types_1 = __webpack_require__(16);
+__webpack_require__(14);
+const types_1 = __webpack_require__(15);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -476,8 +476,7 @@ exports.default = ServiceEntity;
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = __webpack_require__(2);
 const Queue = __webpack_require__(12);
-const winston = __webpack_require__(13);
-__webpack_require__(14); // inject
+__webpack_require__(13); // inject
 const immutable_1 = __webpack_require__(1);
 /**
  * BaseError
@@ -532,25 +531,52 @@ exports.dIConnection = dIConnection;
  * @param {string} mongodb_url
  * @returns {winston.LoggerInstance}
  */
-function dILogger(mongodb_url) {
-    // winston mongodb has typebug
-    const transports = winston.transports;
-    const logger = new winston.Logger({
-        transports: [
-            new (winston.transports.Console)({ level: 'info' }),
-            new transports.MongoDB({
-                level: 'error',
-                db: mongodb_url,
-                collection: 'logs',
-                storeHost: true,
-                tryReconnect: true,
-            }),
-        ],
-    });
-    logger.log('info', `Logger is connected to ${mongodb_url}`);
-    return logger;
+function dILogger(mongodbURL, winston, container) {
+    if (!mongodbURL || !winston || !container) {
+        throw new Error('Missing dependencies');
+    }
+    return function (object, propertyName, index) {
+        try {
+            // winston mongodb has typebug
+            const transports = winston.transports;
+            const logger = new winston.Logger({
+                transports: [
+                    new (winston.transports.Console)({ level: 'info' }),
+                    new transports.MongoDB({
+                        level: 'error',
+                        db: mongodbURL,
+                        collection: 'logs',
+                        storeHost: true,
+                        tryReconnect: true,
+                    }),
+                ],
+            });
+            container.registerHandler({ object, propertyName, index, value: () => logger });
+        }
+        catch (error) {
+            throw error;
+        }
+    };
 }
 exports.dILogger = dILogger;
+// export function dILogger(mongodb_url: string): winston.LoggerInstance {
+//   // winston mongodb has typebug
+//   const transports = winston.transports as WinstonMongoDBTransports;
+//   const logger = new winston.Logger({
+//     transports: [
+//       new (winston.transports.Console)({ level: 'info' }),
+//       new transports.MongoDB({
+//         level: 'error',
+//         db: mongodb_url,
+//         collection: 'logs',
+//         storeHost: true, // origin of log (hostname)
+//         tryReconnect: true, // we make sure we always log
+//       }),
+//     ],
+//   });
+//   logger.log('info', `Logger is connected to ${mongodb_url}`);
+//   return logger;
+// }
 /**
  * Injectable Redis interface
  *
@@ -588,22 +614,16 @@ module.exports = require("bull");
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("winston");
+module.exports = require("winston-mongodb");
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = require("winston-mongodb");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
 module.exports = require("reflect-metadata");
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

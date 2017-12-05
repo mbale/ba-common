@@ -5,6 +5,7 @@ import { Queue as IQueue } from 'bull';
 import * as winston from 'winston';
 import 'winston-mongodb';
 import { Map } from 'immutable';
+import { Winston } from 'winston';
 /**
  * BaseError
  *
@@ -32,7 +33,7 @@ export declare function dIConnection(mongodbURL: string, entities: Function[], c
  * @param {string} mongodb_url
  * @returns {winston.LoggerInstance}
  */
-export declare function dILogger(mongodb_url: string): winston.LoggerInstance;
+export declare function dILogger(mongodbURL: string, winston: Winston, container: typeof Container): (object: object, propertyName: string, index?: number) => void;
 /**
  * Injectable Redis interface
  *
