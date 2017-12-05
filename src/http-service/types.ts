@@ -20,3 +20,14 @@ export interface GetMatchesQueryParams {
   awayTeamId?: string;
   leagueId?: string;
 }
+
+/**
+ * Queryparam interface for get games
+ * 
+ * @interface GetGamesQueryParams
+ */
+export interface GetGamesQueryParams {
+  ids?: string[] | string;
+  gameSlug: string;
+  name: string;
+}

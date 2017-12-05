@@ -22,6 +22,7 @@ import {
 } from './entity/types';
 import { 
   GetMatchesQueryParams,
+  GetGamesQueryParams,
 } from './http-service/types';
 import { 
   CompareModes, 
@@ -55,6 +56,7 @@ export {
   TeamSocialSite, 
   TeamSocialSiteType,
   GetMatchesQueryParams,
+  GetGamesQueryParams,
   League,
   Game,
   AppError,
