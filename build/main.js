@@ -136,8 +136,8 @@ exports.ServiceEntity = entity_1.default;
 const utilities_1 = __webpack_require__(11);
 exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
-__webpack_require__(12);
-const types_1 = __webpack_require__(13);
+__webpack_require__(15);
+const types_1 = __webpack_require__(16);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -473,6 +473,9 @@ exports.default = ServiceEntity;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = __webpack_require__(1);
+const Queue = __webpack_require__(12);
+const winston = __webpack_require__(13);
+__webpack_require__(14); // inject
 /**
  * BaseError
  *
@@ -519,7 +522,53 @@ function dIConnection(mongodbURL, entities, container) {
     };
 }
 exports.dIConnection = dIConnection;
-async function dIRedisQueues(REDIS_URL, queues) {
+/**
+ * Injectable Logger interface
+ *
+ * @export
+ * @param {string} mongodb_url
+ * @returns {winston.LoggerInstance}
+ */
+function dILogger(mongodb_url) {
+    // winston mongodb has typebug
+    const transports = winston.transports;
+    const logger = new winston.Logger({
+        transports: [
+            new (winston.transports.Console)({ level: 'info' }),
+            new transports.MongoDB({
+                level: 'error',
+                db: mongodb_url,
+                collection: 'logs',
+                storeHost: true,
+                tryReconnect: true,
+            }),
+        ],
+    });
+    logger.log('info', `Logger is connected to ${mongodb_url}`);
+    return logger;
+}
+exports.dILogger = dILogger;
+/**
+ * Injectable Redis interface
+ *
+ * @export
+ * @param {string} redis_url
+ * @param {*} queues
+ * @param {winston.LoggerInstance} logger
+ * @returns {{}}
+ */
+function dIRedisQueues(redis_url, queues, logger) {
+    try {
+        for (const [varName, queueName] of Object.entries(queues)) {
+            queues[varName] = new Queue(queueName, redis_url);
+        }
+        logger.info(`Redis's connected to ${redis_url}`);
+        return queues;
+    }
+    catch (error) {
+        logger.log('error', error);
+        throw error;
+    }
 }
 exports.dIRedisQueues = dIRedisQueues;
 
@@ -528,10 +577,28 @@ exports.dIRedisQueues = dIRedisQueues;
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = require("reflect-metadata");
+module.exports = require("bull");
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+module.exports = require("winston");
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("winston-mongodb");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("reflect-metadata");
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

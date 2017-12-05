@@ -1,5 +1,9 @@
 import { ConnectionOptions, createConnection } from 'typeorm';
 import { Container } from 'typedi';
+import * as Queue from 'bull';
+import * as winston from 'winston';
+import 'winston-mongodb'; // inject
+import { WinstonMongoDBTransports } from 'winston-mongodb';
 
 /**
  * BaseError
@@ -18,6 +22,8 @@ export class AppError extends Error {
     this.name = this.constructor.name;
   }
 }
+
+
 
 /**
  * Used to inject db dependency
@@ -50,11 +56,52 @@ export function dIConnection(
   };
 }
 
-export interface QueueDefinition {
+/**
+ * Injectable Logger interface
+ * 
+ * @export
+ * @param {string} mongodb_url 
+ * @returns {winston.LoggerInstance} 
+ */
+export function dILogger(mongodb_url: string): winston.LoggerInstance {
+  // winston mongodb has typebug
+  const transports = winston.transports as WinstonMongoDBTransports;
+  const logger = new winston.Logger({
+    transports: [
+      new (winston.transports.Console)({ level: 'info' }),
+      new transports.MongoDB({
+        level: 'error',
+        db: mongodb_url,
+        collection: 'logs',
+        storeHost: true, // origin of log (hostname)
+        tryReconnect: true, // we make sure we always log
+      }),
+    ],
+  });
 
+  logger.log('info', `Logger is connected to ${mongodb_url}`);
+  return logger;
 }
 
-export async function dIRedisQueues(REDIS_URL : string, queues : QueueDefinition) {
+/**
+ * Injectable Redis interface
+ * 
+ * @export
+ * @param {string} redis_url 
+ * @param {*} queues 
+ * @param {winston.LoggerInstance} logger 
+ * @returns {{}} 
+ */
+export function dIRedisQueues(redis_url: string, queues: any, logger: winston.LoggerInstance): {} {
+  try {
+    for (const [varName, queueName] of Object.entries(queues)) {
+      queues[varName] = new Queue(queueName, redis_url);
+    }
 
+    logger.info(`Redis's connected to ${redis_url}`);
+    return queues;
+  } catch (error) {
+    logger.log('error', error);
+    throw error;
+  }
 }
-

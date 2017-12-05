@@ -1,4 +1,7 @@
+/// <reference types="winston" />
 import { Container } from 'typedi';
+import * as winston from 'winston';
+import 'winston-mongodb';
 /**
  * BaseError
  *
@@ -19,6 +22,21 @@ export declare class AppError extends Error {
  * @returns
  */
 export declare function dIConnection(mongodbURL: string, entities: Function[], container: typeof Container): (object: object, propertyName: string, index?: number) => void;
-export interface QueueDefinition {
-}
-export declare function dIRedisQueues(REDIS_URL: string, queues: QueueDefinition): Promise<void>;
+/**
+ * Injectable Logger interface
+ *
+ * @export
+ * @param {string} mongodb_url
+ * @returns {winston.LoggerInstance}
+ */
+export declare function dILogger(mongodb_url: string): winston.LoggerInstance;
+/**
+ * Injectable Redis interface
+ *
+ * @export
+ * @param {string} redis_url
+ * @param {*} queues
+ * @param {winston.LoggerInstance} logger
+ * @returns {{}}
+ */
+export declare function dIRedisQueues(redis_url: string, queues: any, logger: winston.LoggerInstance): {};
