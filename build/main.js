@@ -567,6 +567,7 @@ function dIRedisQueues(redis_url, queues, logger) {
             store = store.set(queueName, new Queue(queueName, redis_url));
         }
         logger.info(`Redis's connected to ${redis_url}`);
+        logger.info(`Queues length: ${store.count()}`);
         return store;
     }
     catch (error) {

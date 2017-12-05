@@ -104,6 +104,7 @@ export function dIRedisQueues(
     }
 
     logger.info(`Redis's connected to ${redis_url}`);
+    logger.info(`Queues length: ${store.count()}`);
     return store;
   } catch (error) {
     logger.log('error', error);
