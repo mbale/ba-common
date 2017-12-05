@@ -21,6 +21,6 @@ export interface GetMatchesQueryParams {
  */
 export interface GetGamesQueryParams {
     ids?: string[] | string;
-    gameSlug?: string;
+    slug?: string;
     name?: string;
 }
