@@ -1,7 +1,7 @@
 import Compare from './compare/compare';
 import HTTPService from './http-service/http-service';
 import ServiceEntity from './entity/entity';
-import { AppError, dIConnection } from './utilities';
+import { AppError, dIConnection, dILogger, dIRedisQueues } from './utilities';
 import 'reflect-metadata';
 import {
   Game,
@@ -61,6 +61,8 @@ export {
   Game,
   AppError,
   dIConnection,
+  dILogger,
+  dIRedisQueues,
   HTTPService,
 };
 

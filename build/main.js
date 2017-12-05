@@ -136,6 +136,8 @@ exports.ServiceEntity = entity_1.default;
 const utilities_1 = __webpack_require__(11);
 exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
+exports.dILogger = utilities_1.dILogger;
+exports.dIRedisQueues = utilities_1.dIRedisQueues;
 __webpack_require__(15);
 const types_1 = __webpack_require__(16);
 exports.MatchMapType = types_1.MatchMapType;
