@@ -562,9 +562,9 @@ exports.dILogger = dILogger;
  */
 function dIRedisQueues(redis_url, queues, logger) {
     try {
-        const store = immutable_1.Map();
+        let store = immutable_1.Map();
         for (const [varName, queueName] of Object.entries(queues)) {
-            store.set(varName, new Queue(queueName, redis_url));
+            store = store.set(queueName, new Queue(queueName, redis_url));
         }
         logger.info(`Redis's connected to ${redis_url}`);
         return store;

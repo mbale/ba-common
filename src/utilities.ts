@@ -97,12 +97,11 @@ export function dILogger(mongodb_url: string): winston.LoggerInstance {
 export function dIRedisQueues(
   redis_url: string, queues: any, logger: winston.LoggerInstance): Map<string, IQueue> {
   try {
-    const store = Map<string, IQueue>();
+    let store = Map<string, IQueue>();
     
     for (const [varName, queueName] of Object.entries(queues)) {
-      store.set(varName, new Queue(queueName, redis_url));
+      store = store.set(queueName, new Queue(queueName, redis_url));
     }
-
 
     logger.info(`Redis's connected to ${redis_url}`);
     return store;
