@@ -1,10 +1,6 @@
 /// <reference types="winston" />
-/// <reference types="bull" />
 import { Container } from 'typedi';
-import { Queue as IQueue } from 'bull';
-import * as winston from 'winston';
 import 'winston-mongodb';
-import { Map } from 'immutable';
 import { Winston } from 'winston';
 /**
  * BaseError
@@ -43,4 +39,4 @@ export declare function dILogger(mongodbURL: string, winston: Winston, container
  * @param {winston.LoggerInstance} logger
  * @returns {{}}
  */
-export declare function dIRedisQueues(redis_url: string, queues: any, logger: winston.LoggerInstance): Map<string, IQueue>;
+export declare function dIRedisQueues(redisURL: string, queues: any, container: typeof Container): (object: object, propertyName: string, index?: number) => void;

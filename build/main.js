@@ -559,24 +559,6 @@ function dILogger(mongodbURL, winston, container) {
     };
 }
 exports.dILogger = dILogger;
-// export function dILogger(mongodb_url: string): winston.LoggerInstance {
-//   // winston mongodb has typebug
-//   const transports = winston.transports as WinstonMongoDBTransports;
-//   const logger = new winston.Logger({
-//     transports: [
-//       new (winston.transports.Console)({ level: 'info' }),
-//       new transports.MongoDB({
-//         level: 'error',
-//         db: mongodb_url,
-//         collection: 'logs',
-//         storeHost: true, // origin of log (hostname)
-//         tryReconnect: true, // we make sure we always log
-//       }),
-//     ],
-//   });
-//   logger.log('info', `Logger is connected to ${mongodb_url}`);
-//   return logger;
-// }
 /**
  * Injectable Redis interface
  *
@@ -586,20 +568,22 @@ exports.dILogger = dILogger;
  * @param {winston.LoggerInstance} logger
  * @returns {{}}
  */
-function dIRedisQueues(redis_url, queues, logger) {
-    try {
-        let store = immutable_1.Map();
-        for (const [varName, queueName] of Object.entries(queues)) {
-            store = store.set(queueName, new Queue(queueName, redis_url));
+function dIRedisQueues(redisURL, queues, container) {
+    if (!redisURL) {
+        throw new Error('Missing dependencies');
+    }
+    return function (object, propertyName, index) {
+        try {
+            let store = immutable_1.Map();
+            for (const [varName, queueName] of Object.entries(queues)) {
+                store = store.set(queueName, new Queue(queueName, redisURL));
+            }
+            container.registerHandler({ object, propertyName, index, value: () => store });
         }
-        logger.info(`Redis's connected to ${redis_url}`);
-        logger.info(`Queues length: ${store.count()}`);
-        return store;
-    }
-    catch (error) {
-        logger.log('error', error);
-        throw error;
-    }
+        catch (error) {
+            throw error;
+        }
+    };
 }
 exports.dIRedisQueues = dIRedisQueues;
 

@@ -26,8 +26,6 @@ export class AppError extends Error {
   }
 }
 
-
-
 /**
  * Used to inject db dependency
  * 
@@ -93,25 +91,6 @@ export function dILogger(mongodbURL : string, winston: Winston, container : type
     }
   };
 }
-// export function dILogger(mongodb_url: string): winston.LoggerInstance {
-//   // winston mongodb has typebug
-//   const transports = winston.transports as WinstonMongoDBTransports;
-//   const logger = new winston.Logger({
-//     transports: [
-//       new (winston.transports.Console)({ level: 'info' }),
-//       new transports.MongoDB({
-//         level: 'error',
-//         db: mongodb_url,
-//         collection: 'logs',
-//         storeHost: true, // origin of log (hostname)
-//         tryReconnect: true, // we make sure we always log
-//       }),
-//     ],
-//   });
-
-//   logger.log('info', `Logger is connected to ${mongodb_url}`);
-//   return logger;
-// }
 
 /**
  * Injectable Redis interface
@@ -122,20 +101,22 @@ export function dILogger(mongodbURL : string, winston: Winston, container : type
  * @param {winston.LoggerInstance} logger 
  * @returns {{}} 
  */
-export function dIRedisQueues(
-  redis_url: string, queues: any, logger: winston.LoggerInstance): Map<string, IQueue> {
-  try {
-    let store = Map<string, IQueue>();
-    
-    for (const [varName, queueName] of Object.entries(queues)) {
-      store = store.set(queueName, new Queue(queueName, redis_url));
-    }
 
-    logger.info(`Redis's connected to ${redis_url}`);
-    logger.info(`Queues length: ${store.count()}`);
-    return store;
-  } catch (error) {
-    logger.log('error', error);
-    throw error;
+export function dIRedisQueues(redisURL: string, queues: any, container: typeof Container) {
+  if (!redisURL) {
+    throw new Error('Missing dependencies');
   }
+  return function (object : object, propertyName : string, index? : number) {
+    try {
+      let store = Map<string, IQueue>();
+      
+      for (const [varName, queueName] of Object.entries(queues)) {
+        store = store.set(queueName, new Queue(queueName, redisURL));
+      }
+
+      container.registerHandler({ object, propertyName, index, value: () => store }); 
+    } catch (error) {
+      throw error;
+    }
+  };
 }
