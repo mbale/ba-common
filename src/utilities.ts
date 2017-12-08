@@ -4,10 +4,11 @@ import { Container } from 'typedi';
 import { Map } from 'immutable';
 import { Queue as IQueue } from 'bull';
 // https://github.com/OptimalBits/bull/issues/786
+// import 'winston-mongodb';
+// import { MongoDB, Winston } from 'winston-mongodb';
 import { Winston } from 'winston';
-import {
-  WinstonMongoDBTransports,
-} from 'winston-mongodb'; // inject
+import 'winston-mongodb';
+// https://github.com/winstonjs/winston-mongodb/issues/97
 
 /**
  * BaseError
@@ -72,11 +73,11 @@ export function dILogger(mongodbURL : string, winston: Winston, container : type
   return function (object : object, propertyName : string, index? : number) {
     try {
       // winston mongodb has typebug
-      const transports = winston.transports as WinstonMongoDBTransports;
+      const transports = winston.transports;
       const logger = new winston.Logger({
         transports: [
           new (winston.transports.Console)({ level: 'info' }),
-          new transports.MongoDB({
+          new winston.transports.MongoDB({
             level: 'error',
             db: mongodbURL,
             collection: 'logs',
@@ -85,6 +86,7 @@ export function dILogger(mongodbURL : string, winston: Winston, container : type
           }),
         ],
       });
+
 
       container.registerHandler({ object, propertyName, index, value: () => logger }); 
     } catch (error) {

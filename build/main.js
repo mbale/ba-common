@@ -144,8 +144,8 @@ exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
 exports.dILogger = utilities_1.dILogger;
 exports.dIRedisQueues = utilities_1.dIRedisQueues;
-__webpack_require__(13);
-const types_1 = __webpack_require__(14);
+__webpack_require__(14);
+const types_1 = __webpack_require__(15);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -479,6 +479,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Queue = __webpack_require__(12);
 const typeorm_1 = __webpack_require__(2);
 const immutable_1 = __webpack_require__(1);
+__webpack_require__(13);
+// https://github.com/winstonjs/winston-mongodb/issues/97
 /**
  * BaseError
  *
@@ -543,7 +545,7 @@ function dILogger(mongodbURL, winston, container) {
             const logger = new winston.Logger({
                 transports: [
                     new (winston.transports.Console)({ level: 'info' }),
-                    new transports.MongoDB({
+                    new winston.transports.MongoDB({
                         level: 'error',
                         db: mongodbURL,
                         collection: 'logs',
@@ -599,10 +601,16 @@ module.exports = require("bull");
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("reflect-metadata");
+module.exports = require("winston-mongodb");
 
 /***/ }),
 /* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("reflect-metadata");
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

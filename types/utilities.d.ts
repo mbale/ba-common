@@ -1,6 +1,7 @@
 /// <reference types="winston" />
 import { Container } from 'typedi';
 import { Winston } from 'winston';
+import 'winston-mongodb';
 /**
  * BaseError
  *

@@ -32,6 +32,7 @@ import {
   CompareRelation, 
   CompareThresholds,
 } from './compare/types';
+import { Container } from 'typedi/Container';
 
 export {
   Compare,
@@ -65,4 +66,3 @@ export {
   dIRedisQueues,
   HTTPService,
 };
-
