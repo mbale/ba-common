@@ -12,8 +12,8 @@ declare abstract class HTTPService {
      * @static
      * @memberof HTTPService
      */
-    static serviceBaseURL: string;
-    static axiosInstance: AxiosInstance;
+    protected baseURL: string;
+    protected axiosInstance: AxiosInstance;
     /**
      * Initialize the core service with bootstrapped values
      * Needs to be called
@@ -23,7 +23,7 @@ declare abstract class HTTPService {
      * @returns
      * @memberof HTTPService
      */
-    static initialize(serviceBaseURL: string): void;
+    initialize(serviceBaseURL: string): void;
     /**
      * Checks if service's healthy
      *
@@ -31,6 +31,6 @@ declare abstract class HTTPService {
      * @returns {Promise<boolean>}
      * @memberof HTTPService
      */
-    static ping(): Promise<boolean>;
+    ping(): Promise<boolean>;
 }
 export default HTTPService;

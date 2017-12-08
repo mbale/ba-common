@@ -1,5 +1,6 @@
 import axios, { AxiosInstance} from 'axios';
 import * as qs from 'qs';
+import { Inject } from 'typedi';
 
 /**
  * Default base class for each service communicator
@@ -14,8 +15,8 @@ abstract class HTTPService {
    * @static
    * @memberof HTTPService
    */
-  public static serviceBaseURL : string = '';
-  public static axiosInstance : AxiosInstance = null;
+  protected baseURL: string = '';
+  protected axiosInstance: AxiosInstance = null;
 
   /**
    * Initialize the core service with bootstrapped values
@@ -26,8 +27,8 @@ abstract class HTTPService {
    * @returns 
    * @memberof HTTPService
    */
-  public static initialize(serviceBaseURL : string) {
-    this.serviceBaseURL = serviceBaseURL;
+  public initialize(serviceBaseURL : string) {
+    this.baseURL = serviceBaseURL;
     this.axiosInstance = axios.create({
       paramsSerializer(param) {
         // by default axios convert same query params into array in URL e.g. ids=[] 
@@ -44,9 +45,9 @@ abstract class HTTPService {
    * @returns {Promise<boolean>} 
    * @memberof HTTPService
    */
-  public static async ping() : Promise<boolean> {
+  public async ping() : Promise<boolean> {
     try {
-      const request = await this.axiosInstance.get(`${this.serviceBaseURL}/ping`);
+      const request = await this.axiosInstance.get(`${this.baseURL}`);
     } catch (e) {
       return false;
     }

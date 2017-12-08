@@ -144,8 +144,8 @@ exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
 exports.dILogger = utilities_1.dILogger;
 exports.dIRedisQueues = utilities_1.dIRedisQueues;
-__webpack_require__(14);
-const types_1 = __webpack_require__(15);
+__webpack_require__(13);
+const types_1 = __webpack_require__(14);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -352,6 +352,16 @@ const qs = __webpack_require__(9);
  * @class HTTPService
  */
 class HTTPService {
+    constructor() {
+        /**
+         * Contains root URL of service
+         *
+         * @static
+         * @memberof HTTPService
+         */
+        this.baseURL = '';
+        this.axiosInstance = null;
+    }
     /**
      * Initialize the core service with bootstrapped values
      * Needs to be called
@@ -361,8 +371,8 @@ class HTTPService {
      * @returns
      * @memberof HTTPService
      */
-    static initialize(serviceBaseURL) {
-        this.serviceBaseURL = serviceBaseURL;
+    initialize(serviceBaseURL) {
+        this.baseURL = serviceBaseURL;
         this.axiosInstance = axios_1.default.create({
             paramsSerializer(param) {
                 // by default axios convert same query params into array in URL e.g. ids=[] 
@@ -378,9 +388,9 @@ class HTTPService {
      * @returns {Promise<boolean>}
      * @memberof HTTPService
      */
-    static async ping() {
+    async ping() {
         try {
-            const request = await this.axiosInstance.get(`${this.serviceBaseURL}/ping`);
+            const request = await this.axiosInstance.get(`${this.baseURL}`);
         }
         catch (e) {
             return false;
@@ -388,14 +398,6 @@ class HTTPService {
         return true;
     }
 }
-/**
- * Contains root URL of service
- *
- * @static
- * @memberof HTTPService
- */
-HTTPService.serviceBaseURL = '';
-HTTPService.axiosInstance = null;
 exports.default = HTTPService;
 
 
@@ -474,9 +476,8 @@ exports.default = ServiceEntity;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(2);
 const Queue = __webpack_require__(12);
-__webpack_require__(13); // inject
+const typeorm_1 = __webpack_require__(2);
 const immutable_1 = __webpack_require__(1);
 /**
  * BaseError
@@ -598,16 +599,10 @@ module.exports = require("bull");
 /* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("winston-mongodb");
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
 module.exports = require("reflect-metadata");
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
