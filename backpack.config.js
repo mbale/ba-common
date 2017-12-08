@@ -5,8 +5,15 @@ module.exports = {
       ]
   
       config.resolve = {
-        extensions: [".ts", ".js", ".json"]
+        extensions: [".ts", ".json"]
       };
+
+      config.plugins.push(
+        new webpack.WatchIgnorePlugin([
+          /\.js$/,
+          /\.d\.ts$/,
+        ]),
+      );
   
       config.module.rules.push(
         {
