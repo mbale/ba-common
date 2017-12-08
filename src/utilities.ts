@@ -1,12 +1,13 @@
+import * as Queue from 'bull';
 import { ConnectionOptions, createConnection } from 'typeorm';
 import { Container } from 'typedi';
-import * as Queue from 'bull';
-import { Queue as IQueue } from 'bull';
-import * as winston from 'winston';
-import 'winston-mongodb'; // inject
-import { WinstonMongoDBTransports } from 'winston-mongodb'; // due to typebug
 import { Map } from 'immutable';
+import { Queue as IQueue } from 'bull';
+// https://github.com/OptimalBits/bull/issues/786
 import { Winston } from 'winston';
+import {
+  WinstonMongoDBTransports,
+} from 'winston-mongodb'; // inject
 
 /**
  * BaseError
