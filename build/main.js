@@ -362,9 +362,11 @@ const inversify_1 = __webpack_require__(8);
  * @class HTTPService
  */
 let HTTPService = class HTTPService {
-    constructor(axiosInstance) {
+    constructor(axiosInstance, logger) {
         this.axiosInstance = axiosInstance;
+        this.logger = logger;
         this.axiosInstance = axiosInstance;
+        this.logger = logger;
     }
     /**
      * Checks if service's healthy
@@ -386,7 +388,8 @@ let HTTPService = class HTTPService {
 HTTPService = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject('axios')),
-    __metadata("design:paramtypes", [Object])
+    __param(1, inversify_1.inject('logger')),
+    __metadata("design:paramtypes", [Object, Object])
 ], HTTPService);
 exports.default = HTTPService;
 

@@ -1,4 +1,6 @@
+/// <reference types="winston" />
 import { AxiosInstance } from 'axios';
+import { LoggerInstance } from 'winston';
 /**
  * Default base class for each service communicator
  *
@@ -7,7 +9,8 @@ import { AxiosInstance } from 'axios';
  */
 declare abstract class HTTPService {
     protected axiosInstance: AxiosInstance;
-    constructor(axiosInstance: AxiosInstance);
+    protected logger: LoggerInstance;
+    constructor(axiosInstance: AxiosInstance, logger: LoggerInstance);
     /**
      * Checks if service's healthy
      *

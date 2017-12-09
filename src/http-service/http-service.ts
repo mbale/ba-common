@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { inject, injectable } from 'inversify';
+import { LoggerInstance } from 'winston';
 
 /**
  * Default base class for each service communicator
@@ -11,8 +12,10 @@ import { inject, injectable } from 'inversify';
 abstract class HTTPService {
   constructor(
     @inject('axios') protected axiosInstance: AxiosInstance,
+    @inject('logger') protected logger: LoggerInstance,
   ) {
     this.axiosInstance = axiosInstance;
+    this.logger = logger;
   }
 
   /**
