@@ -6,24 +6,8 @@ import { AxiosInstance } from 'axios';
  * @class HTTPService
  */
 declare abstract class HTTPService {
-    /**
-     * Contains root URL of service
-     *
-     * @static
-     * @memberof HTTPService
-     */
-    protected baseURL: string;
     protected axiosInstance: AxiosInstance;
-    /**
-     * Initialize the core service with bootstrapped values
-     * Needs to be called
-     *
-     * @static
-     * @param {string} serviceBaseURL
-     * @returns
-     * @memberof HTTPService
-     */
-    initialize(serviceBaseURL: string): void;
+    constructor(axiosInstance: AxiosInstance);
     /**
      * Checks if service's healthy
      *

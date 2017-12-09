@@ -144,8 +144,7 @@ exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
 exports.dILogger = utilities_1.dILogger;
 exports.dIRedisQueues = utilities_1.dIRedisQueues;
-__webpack_require__(14);
-const types_1 = __webpack_require__(15);
+const types_1 = __webpack_require__(14);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -342,44 +341,31 @@ module.exports = require("talisman/metrics/distance/dice");
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __webpack_require__(8);
-const qs = __webpack_require__(9);
+const inversify_1 = __webpack_require__(9);
 /**
  * Default base class for each service communicator
  *
  * @abstract
  * @class HTTPService
  */
-class HTTPService {
-    constructor() {
-        /**
-         * Contains root URL of service
-         *
-         * @static
-         * @memberof HTTPService
-         */
-        this.baseURL = '';
-        this.axiosInstance = null;
-    }
-    /**
-     * Initialize the core service with bootstrapped values
-     * Needs to be called
-     *
-     * @static
-     * @param {string} serviceBaseURL
-     * @returns
-     * @memberof HTTPService
-     */
-    initialize(serviceBaseURL) {
-        this.baseURL = serviceBaseURL;
-        this.axiosInstance = axios_1.default.create({
-            paramsSerializer(param) {
-                // by default axios convert same query params into array in URL e.g. ids=[] 
-                return qs.stringify(param, { indices: false });
-            },
-            baseURL: `${serviceBaseURL}`,
-        });
+let HTTPService = class HTTPService {
+    constructor(axiosInstance) {
+        this.axiosInstance = axiosInstance;
+        this.axiosInstance = axiosInstance;
     }
     /**
      * Checks if service's healthy
@@ -390,14 +376,19 @@ class HTTPService {
      */
     async ping() {
         try {
-            const request = await this.axiosInstance.get(`${this.baseURL}`);
+            const request = await this.axiosInstance.get('/');
         }
         catch (e) {
             return false;
         }
         return true;
     }
-}
+};
+HTTPService = __decorate([
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject(axios_1.default.name)),
+    __metadata("design:paramtypes", [Object])
+], HTTPService);
 exports.default = HTTPService;
 
 
@@ -411,7 +402,7 @@ module.exports = require("axios");
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = require("qs");
+module.exports = require("inversify");
 
 /***/ }),
 /* 10 */
@@ -605,12 +596,6 @@ module.exports = require("winston-mongodb");
 
 /***/ }),
 /* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("reflect-metadata");
-
-/***/ }),
-/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

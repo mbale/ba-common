@@ -2,7 +2,6 @@ import Compare from './compare/compare';
 import HTTPService from './http-service/http-service';
 import ServiceEntity from './entity/entity';
 import { AppError, dIConnection, dILogger, dIRedisQueues } from './utilities';
-import 'reflect-metadata';
 import {
   Game,
   League,
