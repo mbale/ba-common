@@ -1,5 +1,4 @@
-import axios, { AxiosInstance} from 'axios';
-import * as qs from 'qs';
+import axios, { AxiosInstance } from 'axios';
 import { inject, injectable } from 'inversify';
 
 /**
