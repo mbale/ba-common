@@ -11,7 +11,7 @@ import { inject, injectable } from 'inversify';
 @injectable()
 abstract class HTTPService {
   constructor(
-    @inject(axios.name) protected axiosInstance: AxiosInstance,
+    @inject('axios') protected axiosInstance: AxiosInstance,
   ) {
     this.axiosInstance = axiosInstance;
   }

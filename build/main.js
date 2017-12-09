@@ -137,14 +137,14 @@ const compare_1 = __webpack_require__(5);
 exports.Compare = compare_1.default;
 const http_service_1 = __webpack_require__(7);
 exports.HTTPService = http_service_1.default;
-const entity_1 = __webpack_require__(10);
+const entity_1 = __webpack_require__(9);
 exports.ServiceEntity = entity_1.default;
-const utilities_1 = __webpack_require__(11);
+const utilities_1 = __webpack_require__(10);
 exports.AppError = utilities_1.AppError;
 exports.dIConnection = utilities_1.dIConnection;
 exports.dILogger = utilities_1.dILogger;
 exports.dIRedisQueues = utilities_1.dIRedisQueues;
-const types_1 = __webpack_require__(14);
+const types_1 = __webpack_require__(13);
 exports.MatchMapType = types_1.MatchMapType;
 exports.MatchOddsType = types_1.MatchOddsType;
 exports.MatchSourceType = types_1.MatchSourceType;
@@ -354,8 +354,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __webpack_require__(8);
-const inversify_1 = __webpack_require__(9);
+const inversify_1 = __webpack_require__(8);
 /**
  * Default base class for each service communicator
  *
@@ -386,7 +385,7 @@ let HTTPService = class HTTPService {
 };
 HTTPService = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject(axios_1.default.name)),
+    __param(0, inversify_1.inject('axios')),
     __metadata("design:paramtypes", [Object])
 ], HTTPService);
 exports.default = HTTPService;
@@ -396,16 +395,10 @@ exports.default = HTTPService;
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("axios");
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
 module.exports = require("inversify");
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -461,16 +454,16 @@ exports.default = ServiceEntity;
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Queue = __webpack_require__(12);
+const Queue = __webpack_require__(11);
 const typeorm_1 = __webpack_require__(2);
 const immutable_1 = __webpack_require__(1);
-__webpack_require__(13);
+__webpack_require__(12);
 // https://github.com/winstonjs/winston-mongodb/issues/97
 /**
  * BaseError
@@ -583,19 +576,19 @@ exports.dIRedisQueues = dIRedisQueues;
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("bull");
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("winston-mongodb");
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
