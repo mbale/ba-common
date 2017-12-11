@@ -3537,10 +3537,6 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-triple-beam@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/triple-beam/-/triple-beam-1.1.0.tgz#2ac387c8c4bd04bd26c61df891a6079f8592fe10"
-
 ts-lint@^4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/ts-lint/-/ts-lint-4.5.1.tgz#9c22b7b7b862b67324dd1bd213a845c03a7fb8c0"
@@ -3880,13 +3876,12 @@ window-size@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
 
-winston-mongodb@^4.0.0-rc1:
-  version "4.0.0-rc1"
-  resolved "https://registry.yarnpkg.com/winston-mongodb/-/winston-mongodb-4.0.0-rc1.tgz#f5dc7c2ae014697f5b49fa68e11016d434754fa1"
+winston-mongodb@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/winston-mongodb/-/winston-mongodb-3.0.2.tgz#a3ba22a035a183c5d714362afb54bc6a2e498956"
   dependencies:
     "@types/winston" "^2.3.2"
     mongodb "^2.2.19"
-    triple-beam "^1.1.0"
 
 winston@^2.4.0:
   version "2.4.0"

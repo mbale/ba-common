@@ -32,6 +32,6 @@
       "typedi": "^0.5.2",
       "typeorm": "^0.1.6",
       "winston": "^2.4.0",
-      "winston-mongodb": "^4.0.0-rc1"
+      "winston-mongodb": "^3.0.2"
    }
 }
