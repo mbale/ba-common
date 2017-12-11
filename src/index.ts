@@ -32,6 +32,7 @@ import {
   CompareThresholds,
 } from './compare/types';
 import { Container } from 'typedi/Container';
+import { CompareQueryParams } from '../types/http-service/types';
 
 export {
   Compare,
@@ -57,6 +58,7 @@ export {
   TeamSocialSiteType,
   GetMatchesQueryParams,
   GetGamesQueryParams,
+  CompareQueryParams,
   League,
   Game,
   AppError,
