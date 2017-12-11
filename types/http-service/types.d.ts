@@ -24,3 +24,7 @@ export interface GetGamesQueryParams {
     slug?: string;
     name?: string;
 }
+export interface CompareQueryParams {
+    'team-name'?: string;
+    'game-name'?: string;
+}

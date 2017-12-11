@@ -2,7 +2,7 @@ import { MatchStatusType } from '../entity/types';
 import { ObjectID } from 'typeorm';
 
 /*
-  Matches
+  MatchService
 */
 
 /**
@@ -30,4 +30,13 @@ export interface GetGamesQueryParams {
   ids?: string[] | string;
   slug?: string;
   name?: string;
+}
+
+/*
+  TeamService
+*/
+
+export interface CompareQueryParams {
+  'team-name'?: string;
+  'game-name'?: string;
 }
