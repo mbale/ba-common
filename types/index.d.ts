@@ -6,4 +6,5 @@ import { Game, League, Match, MatchMapType, MatchOdds, MatchOddsType, MatchSourc
 import { GetMatchesQueryParams, GetGamesQueryParams } from './http-service/types';
 import { CompareModes, CompareMode, CompareSettings, CompareMatchType, CompareRelation, CompareThresholds } from './compare/types';
 import { CompareQueryParams } from '../types/http-service/types';
-export { Compare, CompareMode, CompareModes, CompareSettings, CompareMatchType, CompareRelation, CompareThresholds, Service, ServiceEntity, MatchMapType, Match, MatchSource, MatchSourceType, MatchOdds, MatchOddsType, MatchStatusType, MatchUpdate, Team, TeamMember, TeamSocialSite, TeamSocialSiteType, GetMatchesQueryParams, GetGamesQueryParams, CompareQueryParams, League, Game, AppError, dIConnection, dILogger, dIRedisQueues, HTTPService };
+import HTTPController from './http-controller/index';
+export { Compare, CompareMode, CompareModes, CompareSettings, CompareMatchType, CompareRelation, CompareThresholds, Service, ServiceEntity, MatchMapType, Match, MatchSource, MatchSourceType, MatchOdds, MatchOddsType, MatchStatusType, MatchUpdate, Team, TeamMember, TeamSocialSite, TeamSocialSiteType, GetMatchesQueryParams, GetGamesQueryParams, CompareQueryParams, HTTPController, League, Game, AppError, dIConnection, dILogger, dIRedisQueues, HTTPService };

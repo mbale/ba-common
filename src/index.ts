@@ -33,6 +33,7 @@ import {
 } from './compare/types';
 import { Container } from 'typedi/Container';
 import { CompareQueryParams } from '../types/http-service/types';
+import HTTPController from './http-controller/index';
 
 export {
   Compare,
@@ -59,6 +60,7 @@ export {
   GetMatchesQueryParams,
   GetGamesQueryParams,
   CompareQueryParams,
+  HTTPController,
   League,
   Game,
   AppError,

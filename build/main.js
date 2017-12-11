@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -117,25 +117,31 @@ module.exports = require("immutable");
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("typeorm");
+module.exports = require("inversify");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(4);
-
+module.exports = require("typeorm");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(5);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const compare_1 = __webpack_require__(5);
+const compare_1 = __webpack_require__(6);
 exports.Compare = compare_1.default;
-const http_service_1 = __webpack_require__(7);
+const http_service_1 = __webpack_require__(8);
 exports.HTTPService = http_service_1.default;
 const entity_1 = __webpack_require__(9);
 exports.ServiceEntity = entity_1.default;
@@ -154,10 +160,12 @@ const types_2 = __webpack_require__(0);
 exports.CompareModes = types_2.CompareModes;
 exports.CompareMode = types_2.CompareMode;
 exports.CompareMatchType = types_2.CompareMatchType;
+const index_1 = __webpack_require__(14);
+exports.HTTPController = index_1.default;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -165,7 +173,7 @@ exports.CompareMatchType = types_2.CompareMatchType;
 Object.defineProperty(exports, "__esModule", { value: true });
 const types_1 = __webpack_require__(0);
 const immutable_1 = __webpack_require__(1);
-const dice_1 = __webpack_require__(6);
+const dice_1 = __webpack_require__(7);
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *
@@ -330,13 +338,13 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("talisman/metrics/distance/dice");
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -354,7 +362,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const inversify_1 = __webpack_require__(8);
+const inversify_1 = __webpack_require__(2);
 /**
  * Default base class for each service communicator
  *
@@ -395,12 +403,6 @@ exports.default = HTTPService;
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = require("inversify");
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -416,7 +418,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(2);
+const typeorm_1 = __webpack_require__(3);
 class ServiceEntity {
     constructor() {
         this._keywords = [];
@@ -464,7 +466,7 @@ exports.default = ServiceEntity;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Queue = __webpack_require__(11);
-const typeorm_1 = __webpack_require__(2);
+const typeorm_1 = __webpack_require__(3);
 const immutable_1 = __webpack_require__(1);
 __webpack_require__(12);
 // https://github.com/winstonjs/winston-mongodb/issues/97
@@ -638,6 +640,48 @@ var TeamSocialSiteType;
     TeamSocialSiteType[TeamSocialSiteType["Twitter"] = 1] = "Twitter";
 })(TeamSocialSiteType = exports.TeamSocialSiteType || (exports.TeamSocialSiteType = {}));
 
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const inversify_1 = __webpack_require__(2);
+const ConnectionManager_1 = __webpack_require__(15);
+let HTTPController = class HTTPController {
+    constructor(logger, connection) {
+        this.logger = logger;
+        this.connection = connection;
+    }
+};
+HTTPController = __decorate([
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject('logger')),
+    __param(1, inversify_1.inject(ConnectionManager_1.ConnectionManager)), __param(1, inversify_1.optional()),
+    __metadata("design:paramtypes", [Object, ConnectionManager_1.ConnectionManager])
+], HTTPController);
+exports.default = HTTPController;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("typeorm/connection/ConnectionManager");
 
 /***/ })
 /******/ ]);
