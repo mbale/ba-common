@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,362 @@ module.exports =
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const extendo_error_1 = __webpack_require__(6);
+const inversify_1 = __webpack_require__(1);
+/**
+ * If connection to microservice is not available
+ *
+ * @export
+ * @class MicroserviceError
+ * @extends {ExtendoError}
+ */
+class MicroserviceError extends extendo_error_1.default {
+    /**
+     * Creates an instance of MicroserviceError.
+     * @param {string} serviceName
+     * @param {string} serviceURL
+     * @memberof MicroserviceError
+     */
+    constructor(serviceName, serviceURL) {
+        super(`${serviceName} is not available at ${serviceURL}`);
+        this.serviceName = null;
+        this.serviceURL = null;
+        this.serviceName = serviceName;
+        this.serviceURL = serviceURL;
+    }
+}
+exports.MicroserviceError = MicroserviceError;
+/**
+ * Default base class for each service communicator
+ *
+ * @abstract
+ * @class HTTPService
+ */
+let HTTPService = class HTTPService {
+    constructor(serviceName, axiosInstance, logger) {
+        this.serviceName = serviceName;
+        this.axiosInstance = axiosInstance;
+        this.logger = logger;
+        this.serviceName = serviceName;
+        this.logger = logger;
+        this.axiosInstance = axiosInstance;
+        // global error handler
+        this.axiosInstance.interceptors.response.use(null, (error) => {
+            this.logger.error(error.message, error.stack);
+            throw new MicroserviceError(serviceName, this.axiosInstance.defaults.baseURL);
+        });
+    }
+    /**
+     * Checks if service's healthy
+     *
+     * @static
+     * @returns {Promise<boolean>}
+     * @memberof HTTPService
+     */
+    async ping() {
+        await this.axiosInstance.get('/');
+        return true;
+    }
+};
+HTTPService = __decorate([
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject('httpservice.name')),
+    __param(1, inversify_1.inject('axios')),
+    __param(2, inversify_1.inject('logger')),
+    __metadata("design:paramtypes", [String, Object, Object])
+], HTTPService);
+exports.default = HTTPService;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("inversify");
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(3);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_controller_1 = __webpack_require__(4);
+exports.HTTPController = http_controller_1.default;
+const http_service_1 = __webpack_require__(0);
+exports.HTTPService = http_service_1.default;
+exports.MicroserviceError = http_service_1.MicroserviceError;
+const service_entity_1 = __webpack_require__(7);
+exports.ServiceEntity = service_entity_1.default;
+const team_http_service_1 = __webpack_require__(9);
+exports.TeamHTTPService = team_http_service_1.default;
+exports.TeamSocialSiteType = team_http_service_1.TeamSocialSiteType;
+const match_http_service_1 = __webpack_require__(10);
+exports.MatchHTTPService = match_http_service_1.default;
+exports.MatchMapType = match_http_service_1.MatchMapType;
+exports.MatchOddsType = match_http_service_1.MatchOddsType;
+exports.MatchSourceType = match_http_service_1.MatchSourceType;
+exports.MatchStatusType = match_http_service_1.MatchStatusType;
+const compare_1 = __webpack_require__(11);
+exports.Compare = compare_1.default;
+exports.CompareMatchType = compare_1.CompareMatchType;
+exports.CompareMode = compare_1.CompareMode;
+exports.CompareModes = compare_1.CompareModes;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const ConnectionManager_1 = __webpack_require__(5);
+const inversify_1 = __webpack_require__(1);
+let HTTPController = class HTTPController {
+    constructor(logger, connection) {
+        this.logger = logger;
+        this.connection = connection;
+    }
+};
+HTTPController = __decorate([
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject('logger')),
+    __param(1, inversify_1.inject(ConnectionManager_1.ConnectionManager)), __param(1, inversify_1.optional()),
+    __metadata("design:paramtypes", [Object, ConnectionManager_1.ConnectionManager])
+], HTTPController);
+exports.default = HTTPController;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("typeorm/connection/ConnectionManager");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("extendo-error");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const typeorm_1 = __webpack_require__(8);
+class ServiceEntity {
+    constructor() {
+        this._keywords = [];
+        this._createdAt = new Date();
+        this._updatedAt = new Date();
+    }
+    updateModificationDate() {
+        this._updatedAt = new Date();
+    }
+}
+__decorate([
+    typeorm_1.ObjectIdColumn(),
+    __metadata("design:type", typeorm_1.ObjectID)
+], ServiceEntity.prototype, "_id", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], ServiceEntity.prototype, "name", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Array)
+], ServiceEntity.prototype, "_keywords", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Date)
+], ServiceEntity.prototype, "_createdAt", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Date)
+], ServiceEntity.prototype, "_updatedAt", void 0);
+__decorate([
+    typeorm_1.BeforeUpdate(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ServiceEntity.prototype, "updateModificationDate", null);
+exports.default = ServiceEntity;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("typeorm");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_service_1 = __webpack_require__(0);
+var TeamSocialSiteType;
+(function (TeamSocialSiteType) {
+    TeamSocialSiteType[TeamSocialSiteType["Facebook"] = 0] = "Facebook";
+    TeamSocialSiteType[TeamSocialSiteType["Twitter"] = 1] = "Twitter";
+})(TeamSocialSiteType = exports.TeamSocialSiteType || (exports.TeamSocialSiteType = {}));
+class TeamHTTPService extends http_service_1.default {
+    async getTeams(params) {
+        const { data } = await this.axiosInstance.get('teams', {
+            params,
+        });
+        return data;
+    }
+    async getGames(params) {
+        const { data } = await this.axiosInstance.get('games', {
+            params,
+        });
+        return data;
+    }
+    async compare(params) {
+        const { data } = await this.axiosInstance.get('compare', {
+            params,
+        });
+        return data;
+    }
+}
+exports.default = TeamHTTPService;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_service_1 = __webpack_require__(0);
+var MatchOddsType;
+(function (MatchOddsType) {
+    MatchOddsType["MoneyLine"] = "moneyline";
+    MatchOddsType["Spread"] = "spread";
+    MatchOddsType["Total"] = "total";
+})(MatchOddsType = exports.MatchOddsType || (exports.MatchOddsType = {}));
+var MatchSourceType;
+(function (MatchSourceType) {
+    MatchSourceType["Pinnacle"] = "pinnacle";
+    MatchSourceType["Oddsgg"] = "oddsgg";
+})(MatchSourceType = exports.MatchSourceType || (exports.MatchSourceType = {}));
+var MatchMapType;
+(function (MatchMapType) {
+    MatchMapType["Match"] = "match";
+    MatchMapType["Map1"] = "map1";
+    MatchMapType["Map2"] = "map2";
+    MatchMapType["Map3"] = "map3";
+    MatchMapType["Map4"] = "map4";
+    MatchMapType["Map5"] = "map5";
+    MatchMapType["Map6"] = "map6";
+    MatchMapType["Map7"] = "map7";
+    MatchMapType["Unknown"] = "unknown";
+})(MatchMapType = exports.MatchMapType || (exports.MatchMapType = {}));
+var MatchStatusType;
+(function (MatchStatusType) {
+    MatchStatusType["Settled"] = "settled";
+    MatchStatusType["ReSettled"] = "resettled";
+    MatchStatusType["Canceled"] = "canceled";
+    MatchStatusType["ReSettleCancelled"] = "resettlecancelled";
+    MatchStatusType["Deleted"] = "deleted";
+    MatchStatusType["Unknown"] = "unknown";
+    // not in db
+    MatchStatusType["Upcoming"] = "upcoming";
+    MatchStatusType["Completed"] = "completed";
+})(MatchStatusType = exports.MatchStatusType || (exports.MatchStatusType = {}));
+class MatchHTTPService extends http_service_1.default {
+    /**
+     * Get matches
+     *
+     * @static
+     * @param {number} [limit]
+     * @param {number} [page]
+     * @param {ObjectID[]} [ids]
+     * @returns {Promise<Match[]>}
+     * @memberof MatchService
+     */
+    async getMatches(params) {
+        const { data } = await this.axiosInstance.get('matches', {
+            params,
+        });
+        return data;
+    }
+    /**
+     * Get leagues
+     *
+     * @static
+     * @param {ObjectID[]} [ids]
+     * @returns {Promise<League[]>}
+     * @memberof MatchService
+     */
+    async getLeagues(params) {
+        const { data } = await this.axiosInstance.get('leagues', {
+            params,
+        });
+        return data;
+    }
+}
+exports.default = MatchHTTPService;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const immutable_1 = __webpack_require__(12);
+const dice_1 = __webpack_require__(13);
 /**
  * Compare type
  *
@@ -105,75 +460,6 @@ var CompareMode;
     CompareMode[CompareMode["SimilarOnly"] = 1] = "SimilarOnly";
     CompareMode[CompareMode["StrictAndSimilar"] = 2] = "StrictAndSimilar";
 })(CompareMode = exports.CompareMode || (exports.CompareMode = {}));
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-module.exports = require("immutable");
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("inversify");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("typeorm");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(5);
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const compare_1 = __webpack_require__(6);
-exports.Compare = compare_1.default;
-const http_service_1 = __webpack_require__(8);
-exports.HTTPService = http_service_1.default;
-const entity_1 = __webpack_require__(9);
-exports.ServiceEntity = entity_1.default;
-const utilities_1 = __webpack_require__(10);
-exports.AppError = utilities_1.AppError;
-exports.dIConnection = utilities_1.dIConnection;
-exports.dILogger = utilities_1.dILogger;
-exports.dIRedisQueues = utilities_1.dIRedisQueues;
-const types_1 = __webpack_require__(13);
-exports.MatchMapType = types_1.MatchMapType;
-exports.MatchOddsType = types_1.MatchOddsType;
-exports.MatchSourceType = types_1.MatchSourceType;
-exports.MatchStatusType = types_1.MatchStatusType;
-exports.TeamSocialSiteType = types_1.TeamSocialSiteType;
-const types_2 = __webpack_require__(0);
-exports.CompareModes = types_2.CompareModes;
-exports.CompareMode = types_2.CompareMode;
-exports.CompareMatchType = types_2.CompareMatchType;
-const index_1 = __webpack_require__(14);
-exports.HTTPController = index_1.default;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const types_1 = __webpack_require__(0);
-const immutable_1 = __webpack_require__(1);
-const dice_1 = __webpack_require__(7);
 /**
  * Base abstract class that contains all core functionality for extending further compare services
  *
@@ -217,23 +503,23 @@ class Compare {
         }
         this.unit = unit.toLowerCase();
         const { mode, thresholds, } = this.compareSettings;
-        const { StrictOnly, SimilarOnly, StrictAndSimilar, } = types_1.CompareMode;
+        const { StrictOnly, SimilarOnly, StrictAndSimilar, } = CompareMode;
         const modelCountBefore = this.relatedEntities.count();
         if (mode === StrictOnly || mode === StrictAndSimilar) {
             const result = this.strictCompare(entity);
             switch (result) {
-                case types_1.CompareMatchType.MainIdentifier:
+                case CompareMatchType.MainIdentifier:
                     this.relatedEntities = this.relatedEntities.push({
                         entityId: entity._id,
-                        relationType: types_1.CompareModes.Strict,
-                        keyType: types_1.CompareMatchType.MainIdentifier,
+                        relationType: CompareModes.Strict,
+                        keyType: CompareMatchType.MainIdentifier,
                     });
                     break;
-                case types_1.CompareMatchType.KeywordIdentifier:
+                case CompareMatchType.KeywordIdentifier:
                     this.relatedEntities = this.relatedEntities.push({
                         entityId: entity._id,
-                        relationType: types_1.CompareModes.Strict,
-                        keyType: types_1.CompareMatchType.KeywordIdentifier,
+                        relationType: CompareModes.Strict,
+                        keyType: CompareMatchType.KeywordIdentifier,
                     });
                 default:
                     break;
@@ -244,7 +530,7 @@ class Compare {
             if (result >= thresholds.dice) {
                 this.relatedEntities = this.relatedEntities.push({
                     entityId: entity._id,
-                    relationType: types_1.CompareModes.Similar,
+                    relationType: CompareModes.Similar,
                     summedIndex: result,
                 });
             }
@@ -283,12 +569,12 @@ class Compare {
             .map(k => k.toLowerCase())
             .contains(unit);
         if (MainIdentifierMatch) {
-            return types_1.CompareMatchType.MainIdentifier;
+            return CompareMatchType.MainIdentifier;
         }
         if (keywordIdentifierMatch) {
-            return types_1.CompareMatchType.KeywordIdentifier;
+            return CompareMatchType.KeywordIdentifier;
         }
-        return types_1.CompareMatchType.NotFound;
+        return CompareMatchType.NotFound;
     }
     /**
      * Compare unit with entity in similar indexed way
@@ -338,350 +624,16 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("talisman/metrics/distance/dice");
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const inversify_1 = __webpack_require__(2);
-/**
- * Default base class for each service communicator
- *
- * @abstract
- * @class HTTPService
- */
-let HTTPService = class HTTPService {
-    constructor(axiosInstance, logger) {
-        this.axiosInstance = axiosInstance;
-        this.logger = logger;
-        this.axiosInstance = axiosInstance;
-        this.logger = logger;
-    }
-    /**
-     * Checks if service's healthy
-     *
-     * @static
-     * @returns {Promise<boolean>}
-     * @memberof HTTPService
-     */
-    async ping() {
-        try {
-            const request = await this.axiosInstance.get('/');
-        }
-        catch (e) {
-            return false;
-        }
-        return true;
-    }
-};
-HTTPService = __decorate([
-    inversify_1.injectable(),
-    __param(0, inversify_1.inject('axios')),
-    __param(1, inversify_1.inject('logger')),
-    __metadata("design:paramtypes", [Object, Object])
-], HTTPService);
-exports.default = HTTPService;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(3);
-class ServiceEntity {
-    constructor() {
-        this._keywords = [];
-        this._createdAt = new Date();
-        this._updatedAt = new Date();
-    }
-    updateModificationDate() {
-        this._updatedAt = new Date();
-    }
-}
-__decorate([
-    typeorm_1.ObjectIdColumn(),
-    __metadata("design:type", typeorm_1.ObjectID)
-], ServiceEntity.prototype, "_id", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], ServiceEntity.prototype, "name", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Array)
-], ServiceEntity.prototype, "_keywords", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Date)
-], ServiceEntity.prototype, "_createdAt", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Date)
-], ServiceEntity.prototype, "_updatedAt", void 0);
-__decorate([
-    typeorm_1.BeforeUpdate(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ServiceEntity.prototype, "updateModificationDate", null);
-exports.default = ServiceEntity;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Queue = __webpack_require__(11);
-const typeorm_1 = __webpack_require__(3);
-const immutable_1 = __webpack_require__(1);
-__webpack_require__(12);
-// https://github.com/winstonjs/winston-mongodb/issues/97
-/**
- * BaseError
- *
- * @export
- * @class AppError
- * @extends {Error}
- */
-class AppError extends Error {
-    constructor(message) {
-        super(message);
-        Error.captureStackTrace(this, this.constructor);
-        // just in case we save name of constructor too
-        this.name = this.constructor.name;
-    }
-}
-exports.AppError = AppError;
-/**
- * Used to inject db dependency
- *
- * @export
- * @param {string} mongodbURL
- * @param {Function[]} entities
- * @param {typeof Container} container
- * @returns
- */
-function dIConnection(mongodbURL, entities, container) {
-    if (!mongodbURL) {
-        throw new Error('Missing mongodb URL');
-    }
-    return function (object, propertyName, index) {
-        try {
-            const dbOptions = {
-                entities,
-                type: 'mongodb',
-                url: mongodbURL,
-                logging: ['query', 'error'],
-            };
-            const connection = typeorm_1.createConnection(dbOptions);
-            container.registerHandler({ object, propertyName, index, value: () => connection });
-        }
-        catch (error) {
-            throw error;
-        }
-    };
-}
-exports.dIConnection = dIConnection;
-/**
- * Injectable Logger interface
- *
- * @export
- * @param {string} mongodb_url
- * @returns {winston.LoggerInstance}
- */
-function dILogger(mongodbURL, winston, container) {
-    if (!mongodbURL || !winston || !container) {
-        throw new Error('Missing dependencies');
-    }
-    return function (object, propertyName, index) {
-        try {
-            // winston mongodb has typebug
-            const transports = winston.transports;
-            const logger = new winston.Logger({
-                transports: [
-                    new (winston.transports.Console)({ level: 'info' }),
-                    new winston.transports.MongoDB({
-                        level: 'error',
-                        db: mongodbURL,
-                        collection: 'logs',
-                        storeHost: true,
-                        tryReconnect: true,
-                    }),
-                ],
-            });
-            container.registerHandler({ object, propertyName, index, value: () => logger });
-        }
-        catch (error) {
-            throw error;
-        }
-    };
-}
-exports.dILogger = dILogger;
-/**
- * Injectable Redis interface
- *
- * @export
- * @param {string} redis_url
- * @param {*} queues
- * @param {winston.LoggerInstance} logger
- * @returns {{}}
- */
-function dIRedisQueues(redisURL, queues, container) {
-    if (!redisURL) {
-        throw new Error('Missing dependencies');
-    }
-    return function (object, propertyName, index) {
-        try {
-            let store = immutable_1.Map();
-            for (const [varName, queueName] of Object.entries(queues)) {
-                store = store.set(queueName, new Queue(queueName, redisURL));
-            }
-            container.registerHandler({ object, propertyName, index, value: () => store });
-        }
-        catch (error) {
-            throw error;
-        }
-    };
-}
-exports.dIRedisQueues = dIRedisQueues;
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-module.exports = require("bull");
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = require("winston-mongodb");
+module.exports = require("immutable");
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var MatchOddsType;
-(function (MatchOddsType) {
-    MatchOddsType["MoneyLine"] = "moneyline";
-    MatchOddsType["Spread"] = "spread";
-    MatchOddsType["Total"] = "total";
-})(MatchOddsType = exports.MatchOddsType || (exports.MatchOddsType = {}));
-var MatchSourceType;
-(function (MatchSourceType) {
-    MatchSourceType["Pinnacle"] = "pinnacle";
-    MatchSourceType["Oddsgg"] = "oddsgg";
-})(MatchSourceType = exports.MatchSourceType || (exports.MatchSourceType = {}));
-var MatchMapType;
-(function (MatchMapType) {
-    MatchMapType["Match"] = "match";
-    MatchMapType["Map1"] = "map1";
-    MatchMapType["Map2"] = "map2";
-    MatchMapType["Map3"] = "map3";
-    MatchMapType["Map4"] = "map4";
-    MatchMapType["Map5"] = "map5";
-    MatchMapType["Map6"] = "map6";
-    MatchMapType["Map7"] = "map7";
-    MatchMapType["Unknown"] = "unknown";
-})(MatchMapType = exports.MatchMapType || (exports.MatchMapType = {}));
-var MatchStatusType;
-(function (MatchStatusType) {
-    MatchStatusType["Settled"] = "settled";
-    MatchStatusType["ReSettled"] = "resettled";
-    MatchStatusType["Canceled"] = "canceled";
-    MatchStatusType["ReSettleCancelled"] = "resettlecancelled";
-    MatchStatusType["Deleted"] = "deleted";
-    MatchStatusType["Unknown"] = "unknown";
-    // not in db
-    MatchStatusType["Upcoming"] = "upcoming";
-    MatchStatusType["Completed"] = "completed";
-})(MatchStatusType = exports.MatchStatusType || (exports.MatchStatusType = {}));
-var TeamSocialSiteType;
-(function (TeamSocialSiteType) {
-    TeamSocialSiteType[TeamSocialSiteType["Facebook"] = 0] = "Facebook";
-    TeamSocialSiteType[TeamSocialSiteType["Twitter"] = 1] = "Twitter";
-})(TeamSocialSiteType = exports.TeamSocialSiteType || (exports.TeamSocialSiteType = {}));
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const inversify_1 = __webpack_require__(2);
-const ConnectionManager_1 = __webpack_require__(15);
-let HTTPController = class HTTPController {
-    constructor(logger, connection) {
-        this.logger = logger;
-        this.connection = connection;
-    }
-};
-HTTPController = __decorate([
-    inversify_1.injectable(),
-    __param(0, inversify_1.inject('logger')),
-    __param(1, inversify_1.inject(ConnectionManager_1.ConnectionManager)), __param(1, inversify_1.optional()),
-    __metadata("design:paramtypes", [Object, ConnectionManager_1.ConnectionManager])
-], HTTPController);
-exports.default = HTTPController;
-
-
-/***/ }),
-/* 15 */
 /***/ (function(module, exports) {
 
-module.exports = require("typeorm/connection/ConnectionManager");
+module.exports = require("talisman/metrics/distance/dice");
 
 /***/ })
 /******/ ]);

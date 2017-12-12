@@ -1535,6 +1535,10 @@ extend@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
+extendo-error@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/extendo-error/-/extendo-error-1.0.1.tgz#30325e0cf6c2fa5f91023d2100ed021826e6317d"
+
 extglob@^0.3.1:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/extglob/-/extglob-0.3.2.tgz#2e18ff3d2f49ab2765cec9023f011daa8d8349a1"

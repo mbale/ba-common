@@ -1,22 +1,13 @@
+import HTTPService from './http-service';
 import { ObjectID } from 'typeorm';
-/**
- * We need the type only during compile time
- * We don't want to include the whole class all the time
- * 
- * @export
- * @interface Service
- */
-export interface Service {
-  _id : ObjectID;
-  name : string;
-  _keywords : string[];
-  _createdAt : Date;
-  _updatedAt : Date;
-}
 
 /*
-  Match
+  DB types
 */
+
+export interface League {
+  name : string;
+}
 
 export interface Match {
   _id : ObjectID;
@@ -89,52 +80,58 @@ export interface MatchUpdate {
 }
 
 /*
-  Team
+  HTTP types
 */
 
-export interface TeamMember {
-  name: string;
-  info?: string;
-  joinedIn?: Date;
-  countryCode?: string;
-  sites?: string[];
-  role?: string;
+export interface GetMatchesQueryParams {
+  ids?: string[] | string;
+  limit?: string;
+  page?: string;
+  statusType?: MatchStatusType;
+  gameId?: string;
+  homeTeamId?: string;
+  awayTeamId?: string;
+  leagueId?: string;
 }
 
-export enum TeamSocialSiteType {
-  Facebook, Twitter,
+export interface GetLeaguesQueryParams {
+  ids?: string[] | string;
 }
 
-export interface TeamSocialSite {
-  type : TeamSocialSiteType;
-  name : string;
+class MatchHTTPService extends HTTPService {
+  /**
+   * Get matches
+   * 
+   * @static
+   * @param {number} [limit] 
+   * @param {number} [page] 
+   * @param {ObjectID[]} [ids] 
+   * @returns {Promise<Match[]>} 
+   * @memberof MatchService
+   */
+  async getMatches(params: GetMatchesQueryParams) : Promise<Match[]> {
+    const { data } = await this.axiosInstance.get('matches', {
+      params,
+    });
+
+    return data;
+  }
+
+  /**
+   * Get leagues
+   * 
+   * @static
+   * @param {ObjectID[]} [ids] 
+   * @returns {Promise<League[]>} 
+   * @memberof MatchService
+   */
+  async getLeagues(params: GetLeaguesQueryParams) : Promise<League[]> {
+    const { data } = await this.axiosInstance.get('leagues', {
+      params,
+    });
+
+    return data;
+  }
 }
 
-export interface Team {
-  info? : string;
-  name : string;
-  members? : TeamMember[];
-  countryCode? : string;
-  site : string;
-  socialSites : TeamSocialSite[];
-  logo? : string;
-}
-
-/*
-  League
-*/
-
-export interface League {
-  name : string;
-}
-
-
-/*
-  Game
-*/
-
-export interface Game {
-  _id: ObjectID;
-  name : string;
-  slug : string;
-}
+export default MatchHTTPService;

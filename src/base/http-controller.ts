@@ -1,6 +1,6 @@
-import { LoggerInstance } from 'winston';
-import { inject, injectable, optional } from 'inversify';
 import { ConnectionManager } from 'typeorm/connection/ConnectionManager';
+import { inject, injectable, optional } from 'inversify';
+import { LoggerInstance } from 'winston';
 
 @injectable()
 abstract class HTTPController {

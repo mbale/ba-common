@@ -1,71 +1,78 @@
-import Compare from './compare/compare';
-import HTTPService from './http-service/http-service';
-import ServiceEntity from './entity/entity';
-import { AppError, dIConnection, dILogger, dIRedisQueues } from './utilities';
-import {
+import HTTPController from './base/http-controller';
+import HTTPService, { MicroserviceError } from './base/http-service';
+import ServiceEntity, { Service } from './base/service-entity';
+import TeamHTTPService, {
+  CompareQueryParams,
+  CompareResponseBody,
   Game,
-  League,
-  Match,
-  MatchMapType,
-  MatchOdds,
-  MatchOddsType,
-  MatchSource,
-  MatchSourceType,
-  MatchStatusType,
-  MatchUpdate,
-  Service,
+  GetGamesQueryParams,
+  GetTeamsQueryParams,
   Team,
   TeamMember,
   TeamSocialSite,
   TeamSocialSiteType,
-} from './entity/types';
-import { 
+} from './base/team-http-service';
+import MatchHTTPService, {
+  GetLeaguesQueryParams,
   GetMatchesQueryParams,
-  GetGamesQueryParams,
-} from './http-service/types';
-import { 
-  CompareModes, 
-  CompareMode, 
-  CompareSettings,
-  CompareMatchType, 
-  CompareRelation, 
-  CompareThresholds,
-} from './compare/types';
-import { Container } from 'typedi/Container';
-import { CompareQueryParams } from '../types/http-service/types';
-import HTTPController from './http-controller/index';
-
-export {
-  Compare,
-  CompareMode,
-  CompareModes,
-  CompareSettings, 
-  CompareMatchType,
-  CompareRelation,
-  CompareThresholds,
-  Service,
-  ServiceEntity,
-  MatchMapType,
+  League,
   Match,
-  MatchSource,
-  MatchSourceType,
+  MatchMapType,
   MatchOdds,
   MatchOddsType,
-  MatchStatusType,
+  MatchSource,
+  MatchSourceType,
   MatchUpdate,
-  Team, 
-  TeamMember, 
-  TeamSocialSite, 
-  TeamSocialSiteType,
-  GetMatchesQueryParams,
-  GetGamesQueryParams,
-  CompareQueryParams,
+  MatchStatusType,
+} from './base/match-http-service';
+import Compare, {
+  CompareMatchType,
+  CompareMode,
+  CompareModes,
+  CompareRelation,
+  CompareSettings,
+  CompareThresholds,
+} from './base/compare';
+
+export {
+  // httpcontroller
   HTTPController,
-  League,
+  // httpservice
+  HTTPService, 
+  MicroserviceError,
+  // service entity
+  ServiceEntity,
+  Service,
+  // teamhttp service
+  TeamHTTPService,
+  CompareQueryParams,
+  CompareResponseBody,
   Game,
-  AppError,
-  dIConnection,
-  dILogger,
-  dIRedisQueues,
-  HTTPService,
+  GetGamesQueryParams,
+  GetTeamsQueryParams,
+  Team,
+  TeamMember,
+  TeamSocialSite,
+  TeamSocialSiteType,
+  // matchhttp service
+  MatchHTTPService,
+  GetLeaguesQueryParams,
+  GetMatchesQueryParams,
+  League,
+  Match,
+  MatchMapType,
+  MatchOdds,
+  MatchOddsType,
+  MatchSource,
+  MatchSourceType,
+  MatchUpdate,
+  MatchStatusType,
+  // compare
+  Compare,
+  CompareMatchType,
+  CompareMode,
+  CompareModes,
+  CompareRelation,
+  CompareSettings,
+  CompareThresholds,
 };

@@ -25,6 +25,7 @@
    "dependencies": {
       "axios": "^0.17.1",
       "bull": "^3.3.7",
+      "extendo-error": "^1.0.1",
       "immutable": "^3.8.2",
       "inversify": "^4.6.0",
       "qs": "^6.5.1",

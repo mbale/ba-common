@@ -1,10 +1,7 @@
-import Compare from './compare/compare';
-import HTTPService from './http-service/http-service';
-import ServiceEntity from './entity/entity';
-import { AppError, dIConnection, dILogger, dIRedisQueues } from './utilities';
-import { Game, League, Match, MatchMapType, MatchOdds, MatchOddsType, MatchSource, MatchSourceType, MatchStatusType, MatchUpdate, Service, Team, TeamMember, TeamSocialSite, TeamSocialSiteType } from './entity/types';
-import { GetMatchesQueryParams, GetGamesQueryParams } from './http-service/types';
-import { CompareModes, CompareMode, CompareSettings, CompareMatchType, CompareRelation, CompareThresholds } from './compare/types';
-import { CompareQueryParams } from '../types/http-service/types';
-import HTTPController from './http-controller/index';
-export { Compare, CompareMode, CompareModes, CompareSettings, CompareMatchType, CompareRelation, CompareThresholds, Service, ServiceEntity, MatchMapType, Match, MatchSource, MatchSourceType, MatchOdds, MatchOddsType, MatchStatusType, MatchUpdate, Team, TeamMember, TeamSocialSite, TeamSocialSiteType, GetMatchesQueryParams, GetGamesQueryParams, CompareQueryParams, HTTPController, League, Game, AppError, dIConnection, dILogger, dIRedisQueues, HTTPService };
+import HTTPController from './base/http-controller';
+import HTTPService, { MicroserviceError } from './base/http-service';
+import ServiceEntity, { Service } from './base/service-entity';
+import TeamHTTPService, { CompareQueryParams, CompareResponseBody, Game, GetGamesQueryParams, GetTeamsQueryParams, Team, TeamMember, TeamSocialSite, TeamSocialSiteType } from './base/team-http-service';
+import MatchHTTPService, { GetLeaguesQueryParams, GetMatchesQueryParams, League, Match, MatchMapType, MatchOdds, MatchOddsType, MatchSource, MatchSourceType, MatchUpdate, MatchStatusType } from './base/match-http-service';
+import Compare, { CompareMatchType, CompareMode, CompareModes, CompareRelation, CompareSettings, CompareThresholds } from './base/compare';
+export { HTTPController, HTTPService, MicroserviceError, ServiceEntity, Service, TeamHTTPService, CompareQueryParams, CompareResponseBody, Game, GetGamesQueryParams, GetTeamsQueryParams, Team, TeamMember, TeamSocialSite, TeamSocialSiteType, MatchHTTPService, GetLeaguesQueryParams, GetMatchesQueryParams, League, Match, MatchMapType, MatchOdds, MatchOddsType, MatchSource, MatchSourceType, MatchUpdate, MatchStatusType, Compare, CompareMatchType, CompareMode, CompareModes, CompareRelation, CompareSettings, CompareThresholds };

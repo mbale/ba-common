@@ -1,10 +1,24 @@
-import { Service } from './types';
 import {
   ObjectID,
   ObjectIdColumn,
   Column,
   BeforeUpdate,
 } from 'typeorm';
+
+/**
+ * We need the type only during compile time
+ * We don't want to include the whole class all the time
+ * 
+ * @export
+ * @interface Service
+ */
+export interface Service {
+  _id : ObjectID;
+  name : string;
+  _keywords : string[];
+  _createdAt : Date;
+  _updatedAt : Date;
+}
 
 abstract class ServiceEntity implements Service {
   @ObjectIdColumn()

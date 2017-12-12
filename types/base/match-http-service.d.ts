@@ -1,17 +1,7 @@
+import HTTPService from './http-service';
 import { ObjectID } from 'typeorm';
-/**
- * We need the type only during compile time
- * We don't want to include the whole class all the time
- *
- * @export
- * @interface Service
- */
-export interface Service {
-    _id: ObjectID;
+export interface League {
     name: string;
-    _keywords: string[];
-    _createdAt: Date;
-    _updatedAt: Date;
 }
 export interface Match {
     _id: ObjectID;
@@ -73,36 +63,39 @@ export interface MatchUpdate {
     awayTeamScore: number;
     addedAt: Date;
 }
-export interface TeamMember {
-    name: string;
-    info?: string;
-    joinedIn?: Date;
-    countryCode?: string;
-    sites?: string[];
-    role?: string;
+export interface GetMatchesQueryParams {
+    ids?: string[] | string;
+    limit?: string;
+    page?: string;
+    statusType?: MatchStatusType;
+    gameId?: string;
+    homeTeamId?: string;
+    awayTeamId?: string;
+    leagueId?: string;
 }
-export declare enum TeamSocialSiteType {
-    Facebook = 0,
-    Twitter = 1,
+export interface GetLeaguesQueryParams {
+    ids?: string[] | string;
 }
-export interface TeamSocialSite {
-    type: TeamSocialSiteType;
-    name: string;
+declare class MatchHTTPService extends HTTPService {
+    /**
+     * Get matches
+     *
+     * @static
+     * @param {number} [limit]
+     * @param {number} [page]
+     * @param {ObjectID[]} [ids]
+     * @returns {Promise<Match[]>}
+     * @memberof MatchService
+     */
+    getMatches(params: GetMatchesQueryParams): Promise<Match[]>;
+    /**
+     * Get leagues
+     *
+     * @static
+     * @param {ObjectID[]} [ids]
+     * @returns {Promise<League[]>}
+     * @memberof MatchService
+     */
+    getLeagues(params: GetLeaguesQueryParams): Promise<League[]>;
 }
-export interface Team {
-    info?: string;
-    name: string;
-    members?: TeamMember[];
-    countryCode?: string;
-    site: string;
-    socialSites: TeamSocialSite[];
-    logo?: string;
-}
-export interface League {
-    name: string;
-}
-export interface Game {
-    _id: ObjectID;
-    name: string;
-    slug: string;
-}
+export default MatchHTTPService;
