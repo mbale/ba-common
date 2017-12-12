@@ -1,6 +1,3 @@
-import { ConnectionManager } from 'typeorm';
-console.log(ConnectionManager);
-
 import HTTPController from './base/http-controller';
 import HTTPService, { MicroserviceError } from './base/http-service';
 import ServiceEntity, { Service } from './base/service-entity';
