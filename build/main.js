@@ -67,6 +67,12 @@ module.exports =
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+module.exports = require("inversify");
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -85,7 +91,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const extendo_error_1 = __webpack_require__(6);
-const inversify_1 = __webpack_require__(1);
+const inversify_1 = __webpack_require__(0);
 /**
  * If connection to microservice is not available
  *
@@ -152,12 +158,6 @@ exports.default = HTTPService;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-module.exports = require("inversify");
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -173,21 +173,23 @@ module.exports = __webpack_require__(3);
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_controller_1 = __webpack_require__(4);
 exports.HTTPController = http_controller_1.default;
-const http_service_1 = __webpack_require__(0);
+const http_service_1 = __webpack_require__(1);
 exports.HTTPService = http_service_1.default;
 exports.MicroserviceError = http_service_1.MicroserviceError;
 const service_entity_1 = __webpack_require__(7);
 exports.ServiceEntity = service_entity_1.default;
-const team_http_service_1 = __webpack_require__(9);
+const task_service_1 = __webpack_require__(9);
+exports.TaskService = task_service_1.default;
+const team_http_service_1 = __webpack_require__(10);
 exports.TeamHTTPService = team_http_service_1.default;
 exports.TeamSocialSiteType = team_http_service_1.TeamSocialSiteType;
-const match_http_service_1 = __webpack_require__(10);
+const match_http_service_1 = __webpack_require__(11);
 exports.MatchHTTPService = match_http_service_1.default;
 exports.MatchMapType = match_http_service_1.MatchMapType;
 exports.MatchOddsType = match_http_service_1.MatchOddsType;
 exports.MatchSourceType = match_http_service_1.MatchSourceType;
 exports.MatchStatusType = match_http_service_1.MatchStatusType;
-const compare_1 = __webpack_require__(11);
+const compare_1 = __webpack_require__(12);
 exports.Compare = compare_1.default;
 exports.CompareMatchType = compare_1.CompareMatchType;
 exports.CompareMode = compare_1.CompareMode;
@@ -214,7 +216,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ConnectionManager_1 = __webpack_require__(5);
-const inversify_1 = __webpack_require__(1);
+const inversify_1 = __webpack_require__(0);
 let HTTPController = class HTTPController {
     constructor(logger, connection) {
         this.logger = logger;
@@ -310,8 +312,46 @@ module.exports = require("typeorm");
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_service_1 = __webpack_require__(0);
+const inversify_1 = __webpack_require__(0);
+let TaskService = class TaskService {
+    constructor(logger, queueStore, handlerStore) {
+        this.logger = logger;
+        this.queueStore = queueStore;
+        this.handlerStore = handlerStore;
+    }
+};
+TaskService = __decorate([
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject('logger')),
+    __param(1, inversify_1.inject('queuestore')),
+    __param(2, inversify_1.inject('handlerstore')),
+    __metadata("design:paramtypes", [Object, Map,
+        Map])
+], TaskService);
+exports.default = TaskService;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_service_1 = __webpack_require__(1);
 var TeamSocialSiteType;
 (function (TeamSocialSiteType) {
     TeamSocialSiteType[TeamSocialSiteType["Facebook"] = 0] = "Facebook";
@@ -341,13 +381,13 @@ exports.default = TeamHTTPService;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_service_1 = __webpack_require__(0);
+const http_service_1 = __webpack_require__(1);
 var MatchOddsType;
 (function (MatchOddsType) {
     MatchOddsType["MoneyLine"] = "moneyline";
@@ -419,14 +459,14 @@ exports.default = MatchHTTPService;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const immutable_1 = __webpack_require__(12);
-const dice_1 = __webpack_require__(13);
+const immutable_1 = __webpack_require__(13);
+const dice_1 = __webpack_require__(14);
 /**
  * Compare type
  *
@@ -624,13 +664,13 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("immutable");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("talisman/metrics/distance/dice");
