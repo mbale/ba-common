@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -90,7 +90,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const extendo_error_1 = __webpack_require__(6);
+const extendo_error_1 = __webpack_require__(7);
 const inversify_1 = __webpack_require__(0);
 /**
  * If connection to microservice is not available
@@ -159,24 +159,32 @@ exports.default = HTTPService;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(3);
-
+module.exports = require("typeorm");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(4);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_controller_1 = __webpack_require__(4);
+const typeorm_1 = __webpack_require__(2);
+console.log(typeorm_1.ConnectionManager);
+const http_controller_1 = __webpack_require__(5);
 exports.HTTPController = http_controller_1.default;
 const http_service_1 = __webpack_require__(1);
 exports.HTTPService = http_service_1.default;
 exports.MicroserviceError = http_service_1.MicroserviceError;
-const service_entity_1 = __webpack_require__(7);
+const service_entity_1 = __webpack_require__(8);
 exports.ServiceEntity = service_entity_1.default;
 const task_service_1 = __webpack_require__(9);
 exports.TaskService = task_service_1.default;
@@ -197,7 +205,7 @@ exports.CompareModes = compare_1.CompareModes;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -215,7 +223,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ConnectionManager_1 = __webpack_require__(5);
+const ConnectionManager_1 = __webpack_require__(6);
 const inversify_1 = __webpack_require__(0);
 let HTTPController = class HTTPController {
     constructor(logger, connection) {
@@ -233,19 +241,19 @@ exports.default = HTTPController;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("typeorm/connection/ConnectionManager");
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("extendo-error");
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -260,7 +268,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(8);
+const typeorm_1 = __webpack_require__(2);
 class ServiceEntity {
     constructor() {
         this._keywords = [];
@@ -299,12 +307,6 @@ __decorate([
 ], ServiceEntity.prototype, "updateModificationDate", null);
 exports.default = ServiceEntity;
 
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = require("typeorm");
 
 /***/ }),
 /* 9 */

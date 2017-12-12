@@ -31,7 +31,7 @@
       "qs": "^6.5.1",
       "talisman": "^0.20.0",
       "typedi": "^0.5.2",
-      "typeorm": "0.1.6",
+      "typeorm": "^0.1.8",
       "winston": "^2.4.0",
       "winston-mongodb": "^3.0.2"
    }
