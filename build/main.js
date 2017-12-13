@@ -416,7 +416,7 @@ class TeamHTTPService extends http_service_1.default {
         return data;
     }
     async compare(params) {
-        const { data } = await this.axiosInstance.get('compare', {
+        const { data } = await this.axiosInstance.post('compare', {
             params,
         });
         return data;

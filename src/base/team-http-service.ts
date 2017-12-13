@@ -81,7 +81,7 @@ class TeamHTTPService extends HTTPService {
   }
 
   async compare(params: CompareQueryParams): Promise<CompareResponseBody> {
-    const { data }: { data: CompareResponseBody } = await this.axiosInstance.get('compare', {
+    const { data }: { data: CompareResponseBody } = await this.axiosInstance.post('compare', {
       params,
     });
     return data;
