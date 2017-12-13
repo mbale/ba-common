@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -90,7 +90,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const extendo_error_1 = __webpack_require__(6);
+const extendo_error_1 = __webpack_require__(7);
 const inversify_1 = __webpack_require__(0);
 /**
  * If connection to microservice is not available
@@ -159,51 +159,6 @@ exports.default = HTTPService;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("typeorm");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(4);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const http_controller_1 = __webpack_require__(5);
-exports.HTTPController = http_controller_1.default;
-const http_service_1 = __webpack_require__(1);
-exports.HTTPService = http_service_1.default;
-exports.MicroserviceError = http_service_1.MicroserviceError;
-const service_entity_1 = __webpack_require__(7);
-exports.ServiceEntity = service_entity_1.default;
-const task_service_1 = __webpack_require__(8);
-exports.TaskService = task_service_1.default;
-const team_http_service_1 = __webpack_require__(9);
-exports.TeamHTTPService = team_http_service_1.default;
-exports.TeamSocialSiteType = team_http_service_1.TeamSocialSiteType;
-const match_http_service_1 = __webpack_require__(10);
-exports.MatchHTTPService = match_http_service_1.default;
-exports.MatchMapType = match_http_service_1.MatchMapType;
-exports.MatchOddsType = match_http_service_1.MatchOddsType;
-exports.MatchSourceType = match_http_service_1.MatchSourceType;
-exports.MatchStatusType = match_http_service_1.MatchStatusType;
-const compare_1 = __webpack_require__(11);
-exports.Compare = compare_1.default;
-exports.CompareMatchType = compare_1.CompareMatchType;
-exports.CompareMode = compare_1.CompareMode;
-exports.CompareModes = compare_1.CompareModes;
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -221,8 +176,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(2);
+const typeorm_1 = __webpack_require__(3);
 const inversify_1 = __webpack_require__(0);
+const routing_controllers_1 = __webpack_require__(6);
 let HTTPController = class HTTPController {
     constructor(logger, connectionManager) {
         this.logger = logger;
@@ -236,16 +192,96 @@ HTTPController = __decorate([
     __metadata("design:paramtypes", [Object, typeorm_1.ConnectionManager])
 ], HTTPController);
 exports.default = HTTPController;
+let LoggingMiddleware = class LoggingMiddleware {
+    constructor(logger) {
+        this.logger = logger;
+    }
+    use(request, response, next) {
+        this.logger.info(`
+    headers: 
+    ${request.rawHeaders.join()}
+    method:
+    ${request.method}
+    url:
+    ${request.url}
+    query:
+    ${JSON.stringify(request.query)}
+    source:
+    ${request.connection.remoteAddress}
+    `);
+        next();
+    }
+};
+LoggingMiddleware = __decorate([
+    routing_controllers_1.Middleware({ type: 'before' }),
+    inversify_1.injectable(),
+    __param(0, inversify_1.inject('logger')),
+    __metadata("design:paramtypes", [Object])
+], LoggingMiddleware);
+exports.LoggingMiddleware = LoggingMiddleware;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("typeorm");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(5);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_controller_1 = __webpack_require__(2);
+exports.HTTPController = http_controller_1.default;
+const http_service_1 = __webpack_require__(1);
+exports.HTTPService = http_service_1.default;
+exports.MicroserviceError = http_service_1.MicroserviceError;
+const service_entity_1 = __webpack_require__(8);
+exports.ServiceEntity = service_entity_1.default;
+const task_service_1 = __webpack_require__(9);
+exports.TaskService = task_service_1.default;
+const http_controller_2 = __webpack_require__(2);
+exports.LoggingMiddleware = http_controller_2.LoggingMiddleware;
+const team_http_service_1 = __webpack_require__(10);
+exports.TeamHTTPService = team_http_service_1.default;
+exports.TeamSocialSiteType = team_http_service_1.TeamSocialSiteType;
+const match_http_service_1 = __webpack_require__(11);
+exports.MatchHTTPService = match_http_service_1.default;
+exports.MatchMapType = match_http_service_1.MatchMapType;
+exports.MatchOddsType = match_http_service_1.MatchOddsType;
+exports.MatchSourceType = match_http_service_1.MatchSourceType;
+exports.MatchStatusType = match_http_service_1.MatchStatusType;
+const compare_1 = __webpack_require__(12);
+exports.Compare = compare_1.default;
+exports.CompareMatchType = compare_1.CompareMatchType;
+exports.CompareMode = compare_1.CompareMode;
+exports.CompareModes = compare_1.CompareModes;
 
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("extendo-error");
+module.exports = require("routing-controllers");
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("extendo-error");
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -260,7 +296,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = __webpack_require__(2);
+const typeorm_1 = __webpack_require__(3);
 class ServiceEntity {
     constructor() {
         this._keywords = [];
@@ -301,7 +337,7 @@ exports.default = ServiceEntity;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -325,6 +361,21 @@ let TaskService = class TaskService {
         this.logger = logger;
         this.queueStore = queueStore;
         this.handlerStore = handlerStore;
+        this.logger.info('Taskservice');
+        this.logger.info('Queue names:');
+        this.queueStore.forEach((queue, queuename) => this.logger.info(queuename));
+        this.logger.info('Queue handlers:');
+        this.handlerStore.forEach((handlers, queuename) => {
+            handlers.forEach((identifierObj) => {
+                // check if it has the correct queuename
+                if (queueStore.has(queuename)) {
+                    queueStore.get(queuename)
+                        .process(identifierObj.identifier, job => this[identifierObj.handler](job));
+                    this.logger.info(`identifier: ${identifierObj.identifier}`);
+                    this.logger.info(`handler: ${identifierObj.handler}`);
+                }
+            });
+        });
     }
 };
 TaskService = __decorate([
@@ -339,7 +390,7 @@ exports.default = TaskService;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -375,7 +426,7 @@ exports.default = TeamHTTPService;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -453,14 +504,14 @@ exports.default = MatchHTTPService;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const immutable_1 = __webpack_require__(12);
-const dice_1 = __webpack_require__(13);
+const immutable_1 = __webpack_require__(13);
+const dice_1 = __webpack_require__(14);
 /**
  * Compare type
  *
@@ -658,13 +709,13 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("immutable");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("talisman/metrics/distance/dice");

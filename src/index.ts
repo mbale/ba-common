@@ -2,6 +2,7 @@ import HTTPController from './base/http-controller';
 import HTTPService, { MicroserviceError } from './base/http-service';
 import ServiceEntity, { Service } from './base/service-entity';
 import TaskService, { IdentifierHandler } from './base/task-service';
+import { LoggingMiddleware } from './base/http-controller';
 import TeamHTTPService, {
   CompareQueryParams,
   CompareResponseBody,
@@ -38,6 +39,7 @@ import Compare, {
 export {
   // httpcontroller
   HTTPController,
+  LoggingMiddleware,
   // httpservice
   HTTPService, 
   MicroserviceError,
