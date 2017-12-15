@@ -356,7 +356,7 @@ let TaskService = class TaskService {
         this.logger = logger;
         this.queueStore = queueStore;
         this.handlerStore = handlerStore;
-        this.logger.info('Taskservice');
+        this.logger.info('Tieing queues and handlers');
         this.logger.info('Queue names:');
         this.queueStore.forEach((queue, queuename) => this.logger.info(queuename));
         this.logger.info('Queue handlers:');

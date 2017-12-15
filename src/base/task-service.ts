@@ -16,7 +16,7 @@ abstract class TaskService {
     @inject('queuestore') protected queueStore: Map<string, IQueue>,
     @inject('handlerstore') protected handlerStore: Map<string, IdentifierHandler[]>,
   ) {
-    this.logger.info('Taskservice');
+    this.logger.info('Tieing queues and handlers');
     this.logger.info('Queue names:');
     this.queueStore.forEach((queue, queuename) => this.logger.info(queuename));
   
