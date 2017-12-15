@@ -132,10 +132,7 @@ let HTTPService = class HTTPService {
         // global error handler
         this.axiosInstance.interceptors.response.use(null, (error) => {
             if (error.response) {
-                this.logger.error(error.message, error.stack);
-            }
-            else if (error.request) {
-                this.logger.error(error.message, error.stack);
+                this.logger.warn(error.message, error.stack);
             }
             else {
                 this.logger.error(error.message, error.stack);
