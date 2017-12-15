@@ -50,10 +50,10 @@ abstract class HTTPService {
         this.logger.warn(error.message, error.stack);
       } else if (error.request) { // network or server error
         this.logger.error(error.message, error.stack);
-        throw new MicroserviceError(serviceName, error.request);
+        throw new MicroserviceError(serviceName, error.config.baseURL);
       } else { // internal error on sender
         this.logger.error(error.message, error.stack);
-        throw new MicroserviceError(serviceName, error.request);
+        throw new MicroserviceError(serviceName, error.config.baseURL);
       }
     });
   }

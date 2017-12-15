@@ -136,11 +136,11 @@ let HTTPService = class HTTPService {
             }
             else if (error.request) {
                 this.logger.error(error.message, error.stack);
-                throw new MicroserviceError(serviceName, error.request);
+                throw new MicroserviceError(serviceName, error.config.baseURL);
             }
             else {
                 this.logger.error(error.message, error.stack);
-                throw new MicroserviceError(serviceName, error.request);
+                throw new MicroserviceError(serviceName, error.config.baseURL);
             }
         });
     }
