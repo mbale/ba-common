@@ -47,12 +47,12 @@ abstract class HTTPService {
     // global error handler
     this.axiosInstance.interceptors.response.use(null, (error: AxiosError) => {
       if (error.response) { // semantics error
-        this.logger.warn(error.message, error);
+        this.logger.warn(error.message, error.stack);
       } else if (error.request) { // network or server error
-        this.logger.error(error.message, error);
+        this.logger.error(error.message, error.stack);
         throw new MicroserviceError(serviceName, error.request);
       } else { // internal error on sender
-        this.logger.error(error.message, error);
+        this.logger.error(error.message, error.stack);
         throw new MicroserviceError(serviceName, error.request);
       }
     });
