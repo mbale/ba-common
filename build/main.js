@@ -129,16 +129,6 @@ let HTTPService = class HTTPService {
         this.serviceName = serviceName;
         this.logger = logger;
         this.axiosInstance = axiosInstance;
-        // global error handler
-        this.axiosInstance.interceptors.response.use(null, (error) => {
-            if (error.response) {
-                this.logger.warn(error.message, error.stack);
-            }
-            else {
-                this.logger.error(error.message, error.stack);
-            }
-            throw error;
-        });
     }
     /**
      * Checks if service's healthy
