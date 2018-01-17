@@ -18,6 +18,7 @@ export interface MatchOdds {
     away: number;
     type: MatchOddsType;
     _id: ObjectID;
+    fetchedAt: Date;
 }
 export declare enum MatchOddsType {
     MoneyLine = "moneyline",

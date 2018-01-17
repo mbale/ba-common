@@ -1,8 +1,7 @@
-import HTTPController from './base/http-controller';
+import HTTPController, { LoggingMiddleware } from './base/http-controller';
 import HTTPService, { MicroserviceError } from './base/http-service';
 import ServiceEntity, { Service } from './base/service-entity';
 import TaskService, { IdentifierHandler } from './base/task-service';
-import { LoggingMiddleware } from './base/http-controller';
 import TeamHTTPService, {
   CompareQueryParams,
   CompareResponseBody,
