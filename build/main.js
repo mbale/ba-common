@@ -182,16 +182,18 @@ const service_entity_1 = __webpack_require__(8);
 exports.ServiceEntity = service_entity_1.default;
 const task_service_1 = __webpack_require__(9);
 exports.TaskService = task_service_1.default;
-const team_http_service_1 = __webpack_require__(10);
+const rabbitmq_config_1 = __webpack_require__(10);
+exports.rabbitMQConfig = rabbitmq_config_1.default;
+const team_http_service_1 = __webpack_require__(11);
 exports.TeamHTTPService = team_http_service_1.default;
 exports.TeamSocialSiteType = team_http_service_1.TeamSocialSiteType;
-const match_http_service_1 = __webpack_require__(11);
+const match_http_service_1 = __webpack_require__(12);
 exports.MatchHTTPService = match_http_service_1.default;
 exports.MatchMapType = match_http_service_1.MatchMapType;
 exports.MatchOddsType = match_http_service_1.MatchOddsType;
 exports.MatchSourceType = match_http_service_1.MatchSourceType;
 exports.MatchStatusType = match_http_service_1.MatchStatusType;
-const compare_1 = __webpack_require__(12);
+const compare_1 = __webpack_require__(13);
 exports.Compare = compare_1.default;
 exports.CompareMatchType = compare_1.CompareMatchType;
 exports.CompareMode = compare_1.CompareMode;
@@ -390,6 +392,26 @@ exports.default = TaskService;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+function rabbitMQConfig(uri, exchanges, queues, bindings) {
+    return {
+        connection: {
+            uri,
+        },
+        exchanges,
+        queues,
+        bindings,
+    };
+}
+exports.default = rabbitMQConfig;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 const http_service_1 = __webpack_require__(1);
 var TeamSocialSiteType;
 (function (TeamSocialSiteType) {
@@ -420,7 +442,7 @@ exports.default = TeamHTTPService;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -498,14 +520,14 @@ exports.default = MatchHTTPService;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const immutable_1 = __webpack_require__(13);
-const dice_1 = __webpack_require__(14);
+const immutable_1 = __webpack_require__(14);
+const dice_1 = __webpack_require__(15);
 /**
  * Compare type
  *
@@ -703,13 +725,13 @@ exports.default = Compare;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("immutable");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("talisman/metrics/distance/dice");

@@ -24,6 +24,7 @@ export interface TeamSocialSite {
 }
 
 export interface Team {
+  _id: ObjectID;
   info? : string;
   name : string;
   members? : TeamMember[];
