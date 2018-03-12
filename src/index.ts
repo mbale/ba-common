@@ -26,6 +26,7 @@ import MatchHTTPService, {
   MatchSourceType,
   MatchUpdate,
   MatchStatusType,
+  MatchOddsSource,
 } from './base/match-http-service';
 import Compare, {
   CompareMatchType,
@@ -41,7 +42,7 @@ export {
   HTTPController,
   LoggingMiddleware,
   // httpservice
-  HTTPService, 
+  HTTPService,
   MicroserviceError,
   // service entity
   ServiceEntity,
@@ -64,6 +65,7 @@ export {
   League,
   Match,
   MatchMapType,
+  MatchOddsSource,
   MatchOdds,
   MatchOddsType,
   MatchSource,

@@ -193,6 +193,7 @@ exports.MatchMapType = match_http_service_1.MatchMapType;
 exports.MatchOddsType = match_http_service_1.MatchOddsType;
 exports.MatchSourceType = match_http_service_1.MatchSourceType;
 exports.MatchStatusType = match_http_service_1.MatchStatusType;
+exports.MatchOddsSource = match_http_service_1.MatchOddsSource;
 const compare_1 = __webpack_require__(13);
 exports.Compare = compare_1.default;
 exports.CompareMatchType = compare_1.CompareMatchType;
