@@ -20,12 +20,17 @@ export interface Match {
   updates: MatchUpdate[];
 }
 
+export enum MatchOddsSource {
+  PINNACLE = 'pinnacle',
+}
+
 export interface MatchOdds {
   home: number;
   away: number;
   type: MatchOddsType;
   _id: ObjectID;
   fetchedAt: Date;
+  source: MatchOddsSource;
 }
 
 export enum MatchOddsType {

@@ -449,6 +449,10 @@ exports.default = TeamHTTPService;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_service_1 = __webpack_require__(1);
+var MatchOddsSource;
+(function (MatchOddsSource) {
+    MatchOddsSource["PINNACLE"] = "pinnacle";
+})(MatchOddsSource = exports.MatchOddsSource || (exports.MatchOddsSource = {}));
 var MatchOddsType;
 (function (MatchOddsType) {
     MatchOddsType["MoneyLine"] = "moneyline";

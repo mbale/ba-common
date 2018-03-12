@@ -13,12 +13,16 @@ export interface Match {
     odds: MatchOdds[];
     updates: MatchUpdate[];
 }
+export declare enum MatchOddsSource {
+    PINNACLE = "pinnacle",
+}
 export interface MatchOdds {
     home: number;
     away: number;
     type: MatchOddsType;
     _id: ObjectID;
     fetchedAt: Date;
+    source: MatchOddsSource;
 }
 export declare enum MatchOddsType {
     MoneyLine = "moneyline",
