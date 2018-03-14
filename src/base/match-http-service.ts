@@ -11,6 +11,7 @@ export interface League {
 
 export interface Match {
   _id : ObjectID;
+  urlId: string;
   gameId: ObjectID;
   leagueId: ObjectID;
   homeTeamId: ObjectID;
