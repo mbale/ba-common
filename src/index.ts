@@ -84,5 +84,5 @@ export {
   TaskService,
   IdentifierHandler,
   // external / internal communication
-  rabbitMQConfig
+  rabbitMQConfig,
 };
