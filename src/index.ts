@@ -1,7 +1,7 @@
 import HTTPController, { LoggingMiddleware } from './base/http-controller';
 import HTTPService, { MicroserviceError } from './base/http-service';
 import ServiceEntity, { Service } from './base/service-entity';
-import TaskService, { IdentifierHandler } from './base/task-service';
+import TaskService, { IdentifierHandler, IdentifierTypes } from './base/task-service';
 import rabbitMQConfig from './base/rabbitmq-config';
 import TeamHTTPService, {
   CompareQueryParams,
@@ -85,4 +85,5 @@ export {
   IdentifierHandler,
   // external / internal communication
   rabbitMQConfig,
+  IdentifierTypes
 };

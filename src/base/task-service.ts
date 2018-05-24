@@ -4,8 +4,14 @@ import { MatchSourceType } from './match-http-service';
 import { LoggerInstance } from 'winston';
 import { Queue as IQueue } from 'bull';
 
+export enum IdentifierTypes {
+  Pinnacle = 'pinnacle',
+  Oddsgg = 'oddsgg',
+  Mediawiki = 'mediawiki',
+}
+
 export interface IdentifierHandler {
-  identifier: MatchSourceType;
+  identifier: IdentifierTypes;
   handler: string;
 }
 

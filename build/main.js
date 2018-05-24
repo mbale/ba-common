@@ -182,6 +182,7 @@ const service_entity_1 = __webpack_require__(8);
 exports.ServiceEntity = service_entity_1.default;
 const task_service_1 = __webpack_require__(9);
 exports.TaskService = task_service_1.default;
+exports.IdentifierTypes = task_service_1.IdentifierTypes;
 const rabbitmq_config_1 = __webpack_require__(10);
 exports.rabbitMQConfig = rabbitmq_config_1.default;
 const team_http_service_1 = __webpack_require__(11);
@@ -353,6 +354,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const inversify_1 = __webpack_require__(0);
+var IdentifierTypes;
+(function (IdentifierTypes) {
+    IdentifierTypes["Pinnacle"] = "pinnacle";
+    IdentifierTypes["Oddsgg"] = "oddsgg";
+    IdentifierTypes["Mediawiki"] = "mediawiki";
+})(IdentifierTypes = exports.IdentifierTypes || (exports.IdentifierTypes = {}));
 let TaskService = class TaskService {
     constructor(logger, queueStore, handlerStore) {
         this.logger = logger;

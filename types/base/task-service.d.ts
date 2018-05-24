@@ -1,10 +1,14 @@
 /// <reference types="winston" />
 /// <reference types="bull" />
-import { MatchSourceType } from './match-http-service';
 import { LoggerInstance } from 'winston';
 import { Queue as IQueue } from 'bull';
+export declare enum IdentifierTypes {
+    Pinnacle = "pinnacle",
+    Oddsgg = "oddsgg",
+    Mediawiki = "mediawiki",
+}
 export interface IdentifierHandler {
-    identifier: MatchSourceType;
+    identifier: IdentifierTypes;
     handler: string;
 }
 declare abstract class TaskService {
